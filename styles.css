@@ -1,0 +1,30 @@
+.nav-item {
+	-webkit-transition-duration: 0.8s !important;
+    -moz-transition-duration: 0.8s !important;
+    -o-transition-duration: 0.8s !important;
+    transition-duration: 0.8s ease-in-out !important;
+}
+
+.nav-item:hover {
+	background-color:#004400 !important;
+	background-color:#981E32 !important;
+    -webkit-transition-duration: 0.8s !important;
+    -moz-transition-duration: 0.8s !important;
+    -o-transition-duration: 0.8s !important;
+    transition-duration: 0.8s ease-in-out !important;
+}
+
+.img-faculty {
+	width:50%;
+	height:50%;
+}
+
+.faculty-member {
+	padding: 15px 15%;
+}
+
+h1 {
+	text-align:center;
+	padding-left:15%;
+	padding-right:15%;
+}
