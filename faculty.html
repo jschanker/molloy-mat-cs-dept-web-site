@@ -10,7 +10,10 @@
 		<script src = "jquery/1.11.1/jquery.min.js"></script>
 		<script>
 			$(document).ready(function() {
-				$("#nav-import").load("navigation.html");
+				$("#nav-import").load("navigation.html", function(data) {
+					$("#faculty-nav-item").addClass('active');
+					$("#topContent").css('margin-top', $("nav").outerHeight(false));
+				});
 			});
 		</script>
 		<script src = "navigation.js"></script>
@@ -42,11 +45,12 @@
 		<!--<div class = "header">
 			&nbsp;
 		</div>-->
-		<div class = "container-fluid">
+		<div class = "container-fluid center-padding">
 			<div class = "row" id = "topContent">
 				<div class = "faculty">
 					<div class = "col-md-12">
-						<h1>Department of Math and Computer Studies</h1>
+						<h1 class = "section-title">Department of Math and Computer Studies</h1>
+						<h2>Full-time Faculty</h2>
 					</div>
 				</div>
 			</div>
@@ -128,6 +132,250 @@
 						Associate Professor<br>
 						<a href = "mailto:mtse@molloy.edu">mtse@molloy.edu</a><br>
 						516.323.3429
+					</div>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "faculty">
+					<div class = "col-md-12">
+						<h2>Part-time Faculty</h2>
+					</div>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "faculty-member">
+					<div class = "col-md-4">
+						<img src = "images/molloy_logo_128x79_ga.png" alt = "Michael Alesi" class = "img-rounded img-responsive img-none">
+					</div>
+					<div class = "col-md-8">
+						Michael Alesi<br>
+						Adjunct Instructor<br>
+						<a href = "mailto:malesi@molloy.edu">malesi@molloy.edu</a><br>
+					</div>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "faculty-member">
+					<div class = "col-md-4">
+						<img src = "images/molloy_logo_128x79_ga.png" alt = "Ronald Cavallaro" class = "img-rounded img-responsive img-none">
+					</div>
+					<div class = "col-md-8">
+						Ronald Cavallaro<br>
+						Adjunct Instructor<br>
+						<a href = "mailto:rcavallaro@molloy.edu">rcavallaro@molloy.edu</a><br>
+					</div>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "faculty-member">
+					<div class = "col-md-4">
+						<img src = "images/molloy_logo_128x79_ga.png" alt = "Joseph Convery" class = "img-rounded img-responsive img-none">
+					</div>
+					<div class = "col-md-8">
+						Joseph Convery<br>
+						Adjunct Instructor<br>
+						<a href = "mailto:jconvery@molloy.edu">jconvery@molloy.edu</a><br>
+					</div>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "faculty-member">
+					<div class = "col-md-4">
+						<img src = "images/molloy_logo_128x79_ga.png" alt = "Kathleen P. Conway" class = "img-rounded img-responsive img-none">
+					</div>
+					<div class = "col-md-8">
+						Kathleen P. Conway<br>
+						Adjunct Field Supervisor<br>
+						<a href = "mailto:kpconway@molloy.edu">kpconway@molloy.edu</a><br>
+					</div>
+				</div>
+			</div>
+			
+			<div class = "row">
+				<div class = "faculty-member">
+					<div class = "col-md-4">
+						<img src = "images/molloy_logo_128x79_ga.png" alt = "Lawrence DiFiore" class = "img-rounded img-responsive img-none">
+					</div>
+					<div class = "col-md-8">
+						Lawrence DiFiore<br>
+						Adjunct Instructor<br>
+						<a href = "mailto:ldifiore@molloy.edu">ldifiore@molloy.edu</a><br>
+					</div>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "faculty-member">
+					<div class = "col-md-4">
+						<img src = "images/molloy_logo_128x79_ga.png" alt = "Marie Fischer" class = "img-rounded img-responsive img-none">
+					</div>
+					<div class = "col-md-8">
+						Marie Fischer<br>
+						Adjunct Instructor<br>
+						<a href = "mailto:mfischer1@molloy.edu">mfischer1@molloy.edu</a><br>
+					</div>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "faculty-member">
+					<div class = "col-md-4">
+						<img src = "images/molloy_logo_128x79_ga.png" alt = "Maria Flood" class = "img-rounded img-responsive img-none">
+					</div>
+					<div class = "col-md-8">
+						Maria Flood<br>
+						Adjunct Instructor<br>
+						<a href = "mailto:mflood@molloy.edu">mflood@molloy.edu</a><br>
+					</div>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "faculty-member">
+					<div class = "col-md-4">
+						<img src = "images/molloy_logo_128x79_ga.png" alt = "Martha Green" class = "img-rounded img-responsive img-none">
+					</div>
+					<div class = "col-md-8">
+						Martha Green<br>
+						Adjunct Instructor<br>
+						<a href = "mailto:mgreen@molloy.edu">mgreen@molloy.edu</a><br>
+					</div>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "faculty-member">
+					<div class = "col-md-4">
+						<img src = "images/molloy_logo_128x79_ga.png" alt = "Vincent Grillo" class = "img-rounded img-responsive img-none">
+					</div>
+					<div class = "col-md-8">
+						Vincent Grillo<br>
+						Adjunct Instructor<br>
+						<a href = "mailto:vgrillo@molloy.edu">vgrillo@molloy.edu</a><br>
+					</div>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "faculty-member">
+					<div class = "col-md-4">
+						<img src = "images/molloy_logo_128x79_ga.png" alt = "Alan Hulsaver" class = "img-rounded img-responsive img-none">
+					</div>
+					<div class = "col-md-8">
+						Alan Hulsaver<br>
+						Adjunct Instructor<br>
+						<a href = "mailto:ahulsaver@molloy.edu">ahulsaver@molloy.edu</a><br>
+					</div>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "faculty-member">
+					<div class = "col-md-4">
+						<img src = "images/molloy_logo_128x79_ga.png" alt = "Peter Hollenstein" class = "img-rounded img-responsive img-none">
+					</div>
+					<div class = "col-md-8">
+						Peter Hollenstein<br>
+						Adjunct Instructor<br>
+						<a href = "mailto:phollenstein@molloy.edu">phollenstein@molloy.edu</a><br>
+					</div>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "faculty-member">
+					<div class = "col-md-4">
+						<img src = "images/molloy_logo_128x79_ga.png" alt = "Leslie Kellner" class = "img-rounded img-responsive img-none">
+					</div>
+					<div class = "col-md-8">
+						Leslie Kellner<br>
+						Adjunct Instructor<br>
+						<a href = "mailto:lkellner@molloy.edu">lkellner@molloy.edu</a><br>
+					</div>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "faculty-member">
+					<div class = "col-md-4">
+						<img src = "images/molloy_logo_128x79_ga.png" alt = "Georgette Macrina" class = "img-rounded img-responsive img-none">
+					</div>
+					<div class = "col-md-8">
+						Georgette Macrina<br>
+						Adjunct Instructor<br>
+						<a href = "mailto:gmacrina@molloy.edu">gmacrina@molloy.edu</a><br>
+					</div>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "faculty-member">
+					<div class = "col-md-4">
+						<img src = "images/molloy_logo_128x79_ga.png" alt = "Marissa Mauro" class = "img-rounded img-responsive img-none">
+					</div>
+					<div class = "col-md-8">
+						Marissa Mauro<br>
+						Adjunct Instructor<br>
+						<a href = "mailto:mmauro@molloy.edu">mmauro@molloy.edu</a><br>
+					</div>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "faculty-member">
+					<div class = "col-md-4">
+						<img src = "images/molloy_logo_128x79_ga.png" alt = "Michael Olivo" class = "img-rounded img-responsive img-none">
+					</div>
+					<div class = "col-md-8">
+						Michael Olivo<br>
+						Director of MIS<br>
+						<a href = "mailto:molivo@molloy.edu">molivo@molloy.edu</a><br>
+					</div>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "faculty-member">
+					<div class = "col-md-4">
+						<img src = "images/molloy_logo_128x79_ga.png" alt = "Salvatore Petrilli" class = "img-rounded img-responsive img-none">
+					</div>
+					<div class = "col-md-8">
+						Salvatore Petrilli<br>
+						Adjunct Instructor<br>
+						<a href = "mailto:spetrilli@molloy.edu">spetrilli@molloy.edu</a><br>
+					</div>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "faculty-member">
+					<div class = "col-md-4">
+						<img src = "images/molloy_logo_128x79_ga.png" alt = "Richard Schiller" class = "img-rounded img-responsive img-none">
+					</div>
+					<div class = "col-md-8">
+						Richard Schiller<br>
+						Adjunct Instructor<br>
+						<a href = "mailto:rschiller@molloy.edu">rschiller@molloy.edu</a><br>
+					</div>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "faculty-member">
+					<div class = "col-md-4">
+						<img src = "images/molloy_logo_128x79_ga.png" alt = "John Towers" class = "img-rounded img-responsive img-none">
+					</div>
+					<div class = "col-md-8">
+						John Towers<br>
+						Adjunct Instructor<br>
+						<a href = "mailto:jtowers@molloy.edu">jtowers@molloy.edu</a><br>
+					</div>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "faculty">
+					<div class = "col-md-12">
+						<h2>Staff</h2>
+					</div>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "staff-member">
+					<div class = "col-md-4">
+						<img src = "images/molloy_logo_128x79_ga.png" alt = "Anne Fisher, Administrative Assistant" class = "img-rounded img-responsive img-none">
+					</div>
+					<div class = "col-md-8">
+						Anne Fisher<br>
+						Administrative Assistant<br>
+						<a href = "mailto:afisher@molloy.edu">afisher@molloy.edu</a><br>
+						516.323.3428
 					</div>
 				</div>
 			</div>

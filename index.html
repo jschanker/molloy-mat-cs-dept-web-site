@@ -1,0 +1,36 @@
+<!doctype html>
+
+<html>
+	<head>
+		<title>Math and Computer Studies | Molloy College</title>
+		<meta charset = "utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="bootstrap.min.css" rel="stylesheet">
+		<link href = "styles.css" type = "text/css" rel = "stylesheet">
+		<script src = "jquery/1.11.1/jquery.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				$("#nav-import").load("navigation.html", function(data) {
+					$("#home-nav-item").addClass('active');
+					$("#topContent").css('margin-top', $("nav").outerHeight(false));
+				});
+			});
+		</script>
+		<script src = "navigation.js"></script>
+	</head>
+	<body>
+		<div id = "nav-import">
+		</div>
+		<div class = "container-fluid">
+			<div class = "row" id = "topContent">
+				<div class = "faculty">
+					<div class = "col-md-12">
+						<h1 class = "section-title">Department of Math and Computer Studies</h1>
+						<h2>About Us</h2>
+						<p></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,3 +1,30 @@
+.center-padding {
+	padding-left: 15%;
+	padding-right: 15%;
+}
+
+.featured {
+	font-weight: bold;
+}
+
+.course-description {
+	top-margin: 0px !important;
+}
+
+img {
+	max-width:100%;
+}
+
+img {
+  border-radius: 50%;
+  -webkit-transition: -webkit-transform 8.8s ease-in-out;
+  transition: transform 8.8s ease-in-out;
+}
+img:hover {
+  -webkit-transform: rotate(2040deg);
+  transform: rotate(2040deg);
+}
+
 .nav-item {
 	-webkit-transition-duration: 0.8s !important;
     -moz-transition-duration: 0.8s !important;
@@ -19,12 +46,36 @@
 	height:50%;
 }
 
-.faculty-member {
-	padding: 15px 15%;
+.img-none {
+	width:50%;
+	height:50%;
+	/*background-image: url(images/molloy_logo_128x79_ga.png);
+	background-repeat: no-repeat;
+	background-position: right;*/
+	background-color:#808080;
+}
+
+.faculty-member, .staff-member {
+	/*padding: 15px 15%;*/
+	padding-top: 15px;
+	padding-bottom: 15px;
 }
 
 h1 {
 	text-align:center;
-	padding-left:15%;
-	padding-right:15%;
+	color:#981E32;
+	border-bottom: 1px solid #004400;
+	/*font-size: 3vw;*/
+	/*padding-left:15%;
+	padding-right:15%;*/
+}
+
+h2 {
+	font-size:150%;
+}
+
+.courses {
+	min-height: 50vh !important;
+	background-color:rgba(242, 84, 84, 1) !important;
+	vertical-align: middle !important;
 }

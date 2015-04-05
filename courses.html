@@ -1,0 +1,59 @@
+<!doctype html>
+
+<html>
+	<head>
+		<title>Math and Computer Studies | Molloy College</title>
+		<meta charset = "utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="bootstrap.min.css" rel="stylesheet">
+		<link href = "styles.css" type = "text/css" rel = "stylesheet">
+		<script src = "jquery/1.11.1/jquery.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				$("#nav-import").load("navigation.html", function(data) {
+					$("#courses-nav-item").addClass('active');
+					$("#topContent").css('margin-top', $("nav").outerHeight(false));
+				});
+			});
+		</script>
+		<script src = "navigation.js"></script>
+	</head>
+	<body>
+		<div id = "nav-import">
+		</div>
+		<div class = "container-fluid">
+			<div class = "row" id = "topContent">
+					<div class = "col-md-12">
+						<h1 class = "section-title">Department of Math and Computer Studies</h1>
+						<h2>Program</h2>
+						<p>The Department of Math and Computer Studies offers the following degrees:</p>
+						<ul>
+							<li><a href = "#">B.A. in Computer Science</a> : Our computer science curriculum focuses on modern web and mobile development.  We teach core computer science concepts by using the Python and JavaScript programming languages as our primary tools.  As you work toward completing the requirements for the degree in computer science, you will also be exposed to popular web frameworks such as Bootstrap and JQuery and the Node.js runtime environment.  Upon graduating, you will have the skills necessary to create your own web applications and experience with web technologies that are used heavily in industry. <a href = "#">Show Degree Requirements</a>
+							<!--Our computer science curriculum has a focus in web and mobile development. Our courses are taught primarilly using Python and JavaScript. We teach core computer science concepts while exposing you to popular web technologies such as .--></li>
+							<li><a href = "#">B.S. in Computer Information Systems</a> : </li>
+							<li><a href = "#">B.A. in Mathematics</a> : </li>
+						</ul>
+					</div>
+			</div>
+			<div class = "row courses">
+					<div class = "col-md-4">
+						<div class ="course-description" style = "text-align:center;vertical-align:middle;">
+							<img src = "images/american_roulette_wheel_layout.png" alt = "roulette wheel">
+						</div>
+					</div>
+					<div class = "col-md-8">
+						<div class ="course-description" style = "">
+							<h2>CSC 120: PROGRAMMING I</h2>
+							<p class = "course-description">This course provides an accelerated introduction to computer programming in a readable scripting language such as Python.  The emphasis 
+							of the course will be on developing logical and algorithmic problem solving skills.  Students will learn how to state problems precisely 
+							and reason about the correctness of their code.  Topics include functions, conditional statements, loops, loop invariants, simulations, 
+							sets, lists, recursion, and inductive reasoning.  Prerequisite: SAT mathematics score of at least 540, CIS/CSC 103, or approval from 
+							department faculty member. (Offered Fall) Lab Fee-$75.00. 3 credits</p>
+							<p><span class = "featured">Featured course problem (Can you beat the odds?)</span>: The probability of the ball landing on black after a standard American Roulette wheel is spun is 18/38 = 9/19 &approx; 47.37%.  You start with 400 Molloy points.  You win 100 points if the ball lands on black and lose 100 if it lands on red or green.  If you play until you have 500 (net gain of 100) or lose everything, how likely are you to win those points?</p>
+							<p>We can write a program to approximate this probability by simulating 100,000 wheel spins.  How likely are you to go up by 100 points?  The answer may surprise you, but be careful with this strategy because when you lose, you lose all 400 points!</p>     
+						</div>
+					</div>
+			</div>
+		</div>
+	</body>
+</html>
