@@ -3,24 +3,50 @@
 	padding-right: 15%;
 }
 
+.down-arrow {
+	/*margin: auto;*/
+	position:absolute;
+	bottom:5.5%;
+	left:50%;
+}
+
 .featured {
 	font-weight: bold;
 }
 
 .course-description {
 	top-margin: 0px !important;
+	display:none;
+}
+
+.degree-summary {
+	min-height:95vh;
+}
+
+#csc120 {
+	/*display: none;*/
+	min-height:95vh !important;
+	color:#202020 !important;
+	font-family:sans-serif;
 }
 
 img {
 	max-width:100%;
 }
 
-img {
+img.wheel {
+  display:none;
   border-radius: 50%;
   -webkit-transition: -webkit-transform 8.8s ease-in-out;
   transition: transform 8.8s ease-in-out;
 }
-img:hover {
+img.wheel:hover {
+  -webkit-transform: rotate(-1020deg);
+  transform: rotate(-1020deg);
+  /*border: 1px solid black;*/
+}
+
+.spin {
   -webkit-transform: rotate(2040deg);
   transform: rotate(2040deg);
 }
@@ -74,7 +100,7 @@ h2 {
 	font-size:150%;
 }
 
-.courses {
+.course {
 	min-height: 50vh !important;
 	background-color:rgba(242, 84, 84, 1) !important;
 	vertical-align: middle !important;

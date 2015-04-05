@@ -13,6 +13,37 @@
 				$("#nav-import").load("navigation.html", function(data) {
 					$("#courses-nav-item").addClass('active');
 					$("#topContent").css('margin-top', $("nav").outerHeight(false));
+					$(window).on('DOMContentLoaded load resize scroll', function() {
+						//console.log("Resized");
+						//$(".degree-summary").css('max-height', "30vh");
+						$(".course").each(function() {
+							var rect = this.getBoundingClientRect();
+							var windowHeight = window.innerHeight || document.documentElement.clientHeight;
+							//if(rect.top <= $("nav").outerHeight(false)) {
+							console.log(rect.height + " " + rect.top);
+							if(0 <= rect.top && rect.top <= windowHeight - rect.height/2 + $("nav").outerHeight(false)) {
+								//$(".wheel").css("display", "block");
+								$(".wheel").fadeIn("slow");
+								$(".course-description").fadeIn("slow");
+								$(".wheel").addClass("spin");
+								console.log("spin");
+							} else {
+								//$(".wheel").removeClass("spin");
+							}
+						});
+					});
+					$(".down-arrow").click(function() {
+						$('body').animate({
+        					scrollTop: $("#csc120").offset().top
+    					}, 2000);
+					});
+					/*
+					$(window).on('scroll', function() {
+						$("#csc120").show();
+						$(".wheel").hide();
+					});
+					*/
+
 				});
 			});
 		</script>
@@ -23,25 +54,29 @@
 		</div>
 		<div class = "container-fluid">
 			<div class = "row" id = "topContent">
-					<div class = "col-md-12">
+					<div class = "col-md-12 degree-summary">
 						<h1 class = "section-title">Department of Math and Computer Studies</h1>
 						<h2>Program</h2>
 						<p>The Department of Math and Computer Studies offers the following degrees:</p>
 						<ul>
-							<li><a href = "#">B.A. in Computer Science</a> : Our computer science curriculum focuses on modern web and mobile development.  We teach core computer science concepts by using the Python and JavaScript programming languages as our primary tools.  As you work toward completing the requirements for the degree in computer science, you will also be exposed to popular web frameworks such as Bootstrap and JQuery and the Node.js runtime environment.  Upon graduating, you will have the skills necessary to create your own web applications and experience with web technologies that are used heavily in industry. <a href = "#">Show Degree Requirements</a>
+							<li><a href = "#">B.A. in Computer Science</a> : Our computer science curriculum focuses on modern web and mobile development.  We teach core computer science concepts by using the Python and JavaScript programming languages as our primary tools.  As you work toward completing the requirements for the degree in computer science, you will be exposed to HTML5 and the Node.js runtime environment and popular web frameworks such as Bootstrap and JQuery.  You will also gain valuable industry experience through collaborative course projects and the required internship.  Upon graduating, you will have the skills necessary to create your own web applications and experience with web technologies that are used heavily by companies of all sizes. <a href = "#">Show Degree Requirements</a>
 							<!--Our computer science curriculum has a focus in web and mobile development. Our courses are taught primarilly using Python and JavaScript. We teach core computer science concepts while exposing you to popular web technologies such as .--></li>
 							<li><a href = "#">B.S. in Computer Information Systems</a> : </li>
 							<li><a href = "#">B.A. in Mathematics</a> : </li>
 						</ul>
+						<p><a href = "#"><img src = "images/down-arrow.png" class = "down-arrow"></a></p>
 					</div>
 			</div>
-			<div class = "row courses">
-					<div class = "col-md-4">
-						<div class ="course-description" style = "text-align:center;vertical-align:middle;">
-							<img src = "images/american_roulette_wheel_layout.png" alt = "roulette wheel">
+			<div class = "row course" id = "csc120">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+							<img src = "images/american_roulette_wheel_layout.png" alt = "roulette wheel" class = "wheel">
 						</div>
 					</div>
-					<div class = "col-md-8">
+					<div class = "col-md-5">
 						<div class ="course-description" style = "">
 							<h2>CSC 120: PROGRAMMING I</h2>
 							<p class = "course-description">This course provides an accelerated introduction to computer programming in a readable scripting language such as Python.  The emphasis 
@@ -49,9 +84,12 @@
 							and reason about the correctness of their code.  Topics include functions, conditional statements, loops, loop invariants, simulations, 
 							sets, lists, recursion, and inductive reasoning.  Prerequisite: SAT mathematics score of at least 540, CIS/CSC 103, or approval from 
 							department faculty member. (Offered Fall) Lab Fee-$75.00. 3 credits</p>
-							<p><span class = "featured">Featured course problem (Can you beat the odds?)</span>: The probability of the ball landing on black after a standard American Roulette wheel is spun is 18/38 = 9/19 &approx; 47.37%.  You start with 400 Molloy points.  You win 100 points if the ball lands on black and lose 100 if it lands on red or green.  If you play until you have 500 (net gain of 100) or lose everything, how likely are you to win those points?</p>
-							<p>We can write a program to approximate this probability by simulating 100,000 wheel spins.  How likely are you to go up by 100 points?  The answer may surprise you, but be careful with this strategy because when you lose, you lose all 400 points!</p>     
+							<p><span class = "featured">Featured course problem (Can you beat the odds?)</span>: The probability of the ball landing on black after a standard American Roulette wheel is spun is 18/38 = 9/19 &approx; 47.37%.  You start with 400 Molloy points.  You win 100 points if the ball lands on black and lose 100 if it lands on red or green.  If you play until you have 500 (net gain of 100) or lose all 400 points, how likely are you to win those points?</p>
+							<p>We can write a program to approximate this probability by simulating wheel spins for 100,000 attempts.  How likely are you to go up by 100 points?  The answer may surprise you, but be careful with this strategy because when you lose, you lose all of your points!</p>     
 						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
 					</div>
 			</div>
 		</div>
