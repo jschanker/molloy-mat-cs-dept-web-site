@@ -1,70 +1,110 @@
 <!doctype html>
 
 <html>
-	<head>
-		<title>Math and Computer Studies | Molloy College</title>
-		<meta charset = "utf-8">
+    <head>
+        <title>Math and Computer Studies | Molloy College</title>
+        <meta charset = "utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link href="bootstrap.min.css" rel="stylesheet">
 		<link href = "styles.css" type = "text/css" rel = "stylesheet">
 		<script src = "jquery/1.11.1/jquery.min.js"></script>
 		<script>
-			$(document).ready(function() {
-				$("#nav-import").load("navigation.html", function(data) {
-					$("#courses-nav-item").addClass('active');
-					$("#topContent").css('margin-top', $("nav").outerHeight(false));
-					$(window).on('DOMContentLoaded load resize scroll', function() {
-						//console.log("Resized");
-						//$(".degree-summary").css('max-height', "30vh");
-						$(".course").each(function() {
-							var rect = this.getBoundingClientRect();
-							var windowHeight = window.innerHeight || document.documentElement.clientHeight;
-							//if(rect.top <= $("nav").outerHeight(false)) {
-							console.log(rect.height + " " + rect.top);
-							if(0 <= rect.top && rect.top <= windowHeight - rect.height/2 + $("nav").outerHeight(false)) {
-								//$(".wheel").css("display", "block");
-								$(".wheel").fadeIn("slow");
-								$(".course-description").fadeIn("slow");
-								$(".wheel").addClass("spin");
-								console.log("spin");
-							} else {
-								//$(".wheel").removeClass("spin");
-							}
-						});
-					});
-					$(".down-arrow").click(function() {
-						$('body').animate({
-        					scrollTop: $("#csc120").offset().top
-    					}, 2000);
-					});
-					/*
-					$(window).on('scroll', function() {
-						$("#csc120").show();
-						$(".wheel").hide();
-					});
-					*/
+		$(document).ready(function() {
 
+			// NAVIGATION
+
+			$("body").css("padding-top", "35px");
+
+			$("#mobile-button").click(function() {
+				if( $(".navbar-nav").css("display") === $("#phantom-element").css("display") ) {
+					$("#phantom-element").slideToggle();
+				}
+				$(".navbar-nav").slideToggle();
+			});
+
+			$("nav").removeClass("navbar-static-top");
+			$("nav").addClass("navbar-fixed-top");
+
+			$(window).on('DOMContentLoaded load resize scroll', function() {
+				var windowWidth = window.innerWidth || document.documentElement.clientWidth;
+				if(windowWidth >= 900) {
+					$(".nav").css("display", "block");
+				}
+			});
+
+			// SCROLL
+
+			$(".down-arrow").click(function() {
+				var offsetY = $("#csc120").offset().top-$("#top-level-nav").height();
+				console.log(offsetY);
+				$('body').animate({
+        			scrollTop: offsetY
+    			}, 2000);
+			});
+
+			// COURSE DESCRIPTIONS
+
+			$(".course-description").css("display", "none");
+			$(".wheel").css("display", "none");
+
+			$(window).on('DOMContentLoaded load resize scroll', function() {
+				$(".course").each(function() {
+					var rect = this.getBoundingClientRect();
+					var windowHeight = window.innerHeight || document.documentElement.clientHeight;
+					var navHeight = $("#top-level-nav").height();
+					var neededVisibility = Math.min(windowHeight-navHeight,rect.height/2);
+					var actualVisibility = windowHeight - rect.top;
+
+					if(actualVisibility >= neededVisibility) {
+						$(".wheel").fadeIn("slow");
+						$(".course-description").fadeIn("slow");
+						$(".wheel").addClass("spin");
+						console.log("spin");
+					}
 				});
 			});
+		});
+		
 		</script>
-		<script src = "navigation.js"></script>
 	</head>
 	<body>
-		<div id = "nav-import">
-		</div>
+		<nav class = "navbar navbar-inverse navbar-static-top" id = "top-level-nav">
+			<div class = "container-fluid">
+				<div class = "navbar-header">
+					<a class = "navbar-brand nav-item" href = "#">Math and Computer Studies | <small><img src = "images/molloy_logo_128x79_ga.png" style = "max-height:100%"></small></a>
+					<button type="button" class="navbar-toggle" id = "mobile-button"> 
+            			<span class="icon-bar"></span>
+            			<span class="icon-bar"></span>
+            			<span class="icon-bar"></span>
+          			</button>
+          		</div>
+				<div class = "navbar-header" id = "navbar-menu">
+					<ul class = "nav navbar-nav">
+						<li id = "home-nav-item"><a href = "index.html" class = "nav-item">Home</a></li>
+						<!--<li id = "about-nav-item"><a href = "about.html" class = "nav-item">About Us</a></li>-->
+						<li id = "faculty-nav-item"><a href = "faculty.html" class = "nav-item">People</a></li>
+						<li id = "courses-nav-item" class = "active"><a href = "courses.html" class = "nav-item">Program &amp; Courses</a></li>
+						<li id = "projects-nav-item"><a href = "projects.html" class = "nav-item">Projects</a></li>
+						<li id = "internships-nav-item"><a href = "internships.html" class = "nav-item">Internships</a></li>
+						<li id = "club-nav-item"><a href = "club.html" class = "nav-item">Club</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
 		<div class = "container-fluid">
 			<div class = "row" id = "topContent">
 					<div class = "col-md-12 degree-summary">
+						<span id = "phantom-element"></span>
 						<h1 class = "section-title">Department of Math and Computer Studies</h1>
 						<h2>Program</h2>
 						<p>The Department of Math and Computer Studies offers the following degrees:</p>
 						<ul>
-							<li><a href = "#">B.A. in Computer Science</a> : Our computer science curriculum focuses on modern web and mobile development.  We teach core computer science concepts by using the Python and JavaScript programming languages as our primary tools.  As you work toward completing the requirements for the degree in computer science, you will be exposed to HTML5 and the Node.js runtime environment and popular web frameworks such as Bootstrap and JQuery.  You will also gain valuable industry experience through collaborative course projects and the required internship.  Upon graduating, you will have the skills necessary to create your own web applications and experience with web technologies that are used heavily by companies of all sizes. <a href = "#">Show Degree Requirements</a>
+							<li><a href = "#">B.A. in Computer Science</a> : Our computer science curriculum focuses on modern web and mobile development.  We teach core computer science concepts by using the Python and JavaScript programming languages as our primary tools.  As you work toward completing the requirements for the degree in computer science, you will be exposed to HTML5 and the Node.js runtime environment and popular web frameworks and libraries such as Bootstrap and JQuery.  You will also gain valuable industry experience through collaborative course projects and the required internship.  Upon graduating, you will have the skills necessary to create your own web applications and experience with web technologies that are used heavily by companies of all sizes. <a href = "#">Show Degree Requirements</a>
 							<!--Our computer science curriculum has a focus in web and mobile development. Our courses are taught primarilly using Python and JavaScript. We teach core computer science concepts while exposing you to popular web technologies such as .--></li>
 							<li><a href = "#">B.S. in Computer Information Systems</a> : </li>
 							<li><a href = "#">B.A. in Mathematics</a> : </li>
 						</ul>
-						<p><a href = "#"><img src = "images/down-arrow.png" class = "down-arrow"></a></p>
+						<div class = "down-arrow-container"><a href = "#"><img src = "images/down-arrow.png" class = "down-arrow"></a></div>
 					</div>
 			</div>
 			<div class = "row course" id = "csc120">
@@ -86,6 +126,25 @@
 							department faculty member. (Offered Fall) Lab Fee-$75.00. 3 credits</p>
 							<p><span class = "featured">Featured course problem (Can you beat the odds?)</span>: The probability of the ball landing on black after a standard American Roulette wheel is spun is 18/38 = 9/19 &approx; 47.37%.  You start with 400 Molloy points.  You win 100 points if the ball lands on black and lose 100 if it lands on red or green.  If you play until you have 500 (net gain of 100) or lose all 400 points, how likely are you to win those points?</p>
 							<p>We can write a program to approximate this probability by simulating wheel spins for 100,000 attempts.  How likely are you to go up by 100 points?  The answer may surprise you, but be careful with this strategy because when you lose, you lose all of your points!</p>     
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "csc121">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2>CSC 121: PROGRAMMING II</h2>
+							<p class = "course-description">This course is a continuation of CSC 120.  Students will continue to develop their algorithmic problem solving skills while being made increasingly aware of efficiency considerations.  Topics include recurrence relations, time and space complexity, divide and conquer algorithms, dynamic programming, functional programming and advanced data structures.  Students will solve real-world problems in multiple ways, analyzing the tradeoffs associated with each approach.  (Offered Spring) Lab Fee-$75.00. 3 credits</p>
+							<p><span class = "featured">Featured course problem (The $1 Million Dollar Question - Literally!)</span>: </p>    
 						</div>
 					</div>
 					<div class = "col-md-1">
