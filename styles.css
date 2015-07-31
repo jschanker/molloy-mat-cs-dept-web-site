@@ -1,13 +1,84 @@
+body {
+
+}
+
+#navbar-menu {
+  overflow-x: hidden;
+}
+
+@media (max-width:390px) {
+   .navbar-brand {
+      font-size:110%;
+   }
+}
+
+@media (max-width:350px) {
+   .navbar-brand {
+      font-size:100%;
+   }
+}
+
+@media (max-width:330px) {
+   .navbar-brand {
+      font-size:90%;
+   }
+}
+
+@media (max-width:310px) {
+   .navbar-brand {
+      font-size:80%;
+   }
+}
+
+@media (max-width:290px) {
+   .navbar-brand {
+      font-size:70%;
+   }
+}
+
+@media (max-width:270px) {
+   .navbar-brand {
+      font-size:60%;
+   }
+}
+
+@media (max-width:250px) {
+   .navbar-brand {
+      font-size:50%;
+   }
+}
+
+@media (max-width:899px) {
+   #phantom-element {
+      display:block;
+      height:250px;
+   }
+}
+
+@media (min-width:900px) {
+  #phantom-element {
+    display:none;
+  }
+}
+
+#mobile-button {
+
+}
+
 .center-padding {
 	padding-left: 15%;
 	padding-right: 15%;
 }
 
+.down-arrow-container {
+  text-align: center;
+}
+
 .down-arrow {
 	/*margin: auto;*/
-	position:absolute;
+	/*position:absolute;
 	bottom:5.5%;
-	left:50%;
+	left:50%;*/
 }
 
 .featured {
@@ -16,11 +87,11 @@
 
 .course-description {
 	top-margin: 0px !important;
-	display:none;
+	display:block;
 }
 
 .degree-summary {
-	min-height:95vh;
+	/*min-height:95vh;*/
 }
 
 #csc120 {
@@ -35,7 +106,7 @@ img {
 }
 
 img.wheel {
-  display:none;
+  /*display:block;*/
   border-radius: 50%;
   -webkit-transition: -webkit-transform 8.8s ease-in-out;
   transition: transform 8.8s ease-in-out;
@@ -101,7 +172,7 @@ h2 {
 }
 
 .course {
-	min-height: 50vh !important;
+	/*min-height: 50vh !important;*/
 	background-color:rgba(242, 84, 84, 1) !important;
 	vertical-align: middle !important;
 }
