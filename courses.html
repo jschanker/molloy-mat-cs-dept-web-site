@@ -11,6 +11,8 @@
 		<script>
 		$(document).ready(function() {
 
+			var LARGE_SCREEN_SIZE = 900;
+			var inLargeMode = (window.innerWidth || document.documentElement.clientWidth) >= LARGE_SCREEN_SIZE;
 			// NAVIGATION
 
 			$("body").css("padding-top", "35px");
@@ -27,8 +29,13 @@
 
 			$(window).on('DOMContentLoaded load resize scroll', function() {
 				var windowWidth = window.innerWidth || document.documentElement.clientWidth;
-				if(windowWidth >= 900) {
+				if(windowWidth >= LARGE_SCREEN_SIZE) {
+					inLargeMode = true;
 					$(".nav").css("display", "block");
+				}
+				else if(inLargeMode && $(".navbar-nav").css("display") !== $("#phantom-element").css("display")) {
+					inLargeMode = false;
+					$("#phantom-element").slideToggle(0);
 				}
 			});
 
@@ -52,8 +59,8 @@
 					var rect = this.getBoundingClientRect();
 					var windowHeight = window.innerHeight || document.documentElement.clientHeight;
 					var navHeight = $("#top-level-nav").height();
-					var neededVisibility = Math.min(windowHeight-navHeight,rect.height/2);
-					var actualVisibility = windowHeight - rect.top;
+					var neededVisibility = Math.min(windowHeight-navHeight,rect.height/2) - 1;
+					var actualVisibility = windowHeight - rect.top - Math.max(navHeight - rect.top, 0);
 
 					if(actualVisibility >= neededVisibility) {
 						$(".wheel").fadeIn("slow");
@@ -123,7 +130,7 @@
 							of the course will be on developing logical and algorithmic problem solving skills.  Students will learn how to state problems precisely 
 							and reason about the correctness of their code.  Topics include functions, conditional statements, loops, loop invariants, simulations, 
 							sets, lists, recursion, and inductive reasoning.  Prerequisite: SAT mathematics score of at least 540, CIS/CSC 103, or approval from 
-							department faculty member. (Offered Fall) Lab Fee-$75.00. 3 credits</p>
+							department faculty member. (Next Offered: Fall 2015) Lab Fee-$75.00. 3 credits</p>
 							<p><span class = "featured">Featured course problem (Can you beat the odds?)</span>: The probability of the ball landing on black after a standard American Roulette wheel is spun is 18/38 = 9/19 &approx; 47.37%.  You start with 400 Molloy points.  You win 100 points if the ball lands on black and lose 100 if it lands on red or green.  If you play until you have 500 (net gain of 100) or lose all 400 points, how likely are you to win those points?</p>
 							<p>We can write a program to approximate this probability by simulating wheel spins for 100,000 attempts.  How likely are you to go up by 100 points?  The answer may surprise you, but be careful with this strategy because when you lose, you lose all of your points!</p>     
 						</div>
@@ -143,8 +150,141 @@
 					<div class = "col-md-5">
 						<div class ="course-description" style = "">
 							<h2>CSC 121: PROGRAMMING II</h2>
-							<p class = "course-description">This course is a continuation of CSC 120.  Students will continue to develop their algorithmic problem solving skills while being made increasingly aware of efficiency considerations.  Topics include recurrence relations, time and space complexity, divide and conquer algorithms, dynamic programming, functional programming and advanced data structures.  Students will solve real-world problems in multiple ways, analyzing the tradeoffs associated with each approach.  (Offered Spring) Lab Fee-$75.00. 3 credits</p>
-							<p><span class = "featured">Featured course problem (The $1 Million Dollar Question - Literally!)</span>: </p>    
+							<p class = "course-description">This course is a continuation of CSC 120.  Students will continue to develop their algorithmic problem solving skills while being made increasingly aware of efficiency considerations.  Topics include recurrence relations, time and space complexity, divide and conquer algorithms, dynamic programming, functional programming and advanced data structures.  Students will solve real-world problems in multiple ways, analyzing the tradeoffs associated with each approach.  Prerequisite: CSC 120 (Next Offered: Spring 2016) Lab Fee-$75.00. 3 credits</p>
+							<p><span class = "featured">Featured course problem (The $1 Million Dollar Question - Literally!)</span>: Info to be added later.</p>    
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "csc103">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2>CIS/CSC 103: VISUAL PROGRAMMING</h2>
+							<p class = "course-description">An introduction to computer programming through the use of drag-and-drop code blocks. The purpose of the course is to provide an introduction to programming logic and algorithmic problem solving strategies for students with little to no prior programming experience. Students will learn how to use the basic programming constructs such as variables, conditional statements, lists, loops and functions to solve problems by assembling and customizing blocks of code. They will also see how the visual blocks generate actual code and learn how to write some of their own in a friendly beginner language such as Python.  (Next Offered: Fall 2015) Lab Fee-$75.00. 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>    
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "cis112">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2>CIS 112: INTRODUCTION TO WEB DESIGN AND DEVELOPMENT</h2>
+							<p class = "course-description">Students will learn how to create and design web pages using markup and stylesheet languages such as HTML and CSS.  Topics include selectors, inheritance, the box model, tables, page flow, forms, page validation, media, methods for creating multicolumn layouts along with the tradeoffs between them, and the fundamentals of responsive web design.  Students will also be introduced to various online tools that assist in web page creation and publishing.  Throughout the course, there will be an emphasis on the separation of structure and presentation and code readability and maintainability.  At the conclusion, students will create their own web sites that adhere to the principles and guidelines taught throughout the course.  (Next Offered: Fall 2015) Lab Fee-$75.00. 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>    
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "csc235">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2>CIS/CSC 235: INTRODUCTION TO WEB SCRIPTING</h2>
+							<p class = "course-description">An introduction to programming through the use of a web scripting language such as JavaScript.  Topics include variables, functions, conditional statements, loops, arrays, objects, and event handling.  Students will also learn about the Document Object Model and how to manipulate it to make interactive web pages.  The course culminates in the creation of a fully functional graphical web application game.  (Next Offered: Fall 2016) Lab Fee-$75.00. 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>    
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "csc212">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2>CIS/CSC 213: FRONT-END WEB DEVELOPMENT</h2>
+							<p class = "course-description">This course synthesizes and builds upon the principles of structured markup and design style covered in CIS 112 and scripting covered in CIS/CSC 235 in order to create fully interactive and engaging web pages.  Students will use the latest web technologies such as HTML5, CSS3, and JQuery for this purpose.  Topics will vary depending upon student interest, but will include client-server interaction, cross-browser and cross-platform support, mobile friendly user interface design, and code reuse and maintainability.  Prerequisite: CIS 112 and CIS/CSC 235 (Next Offered: Spring 2017) Lab Fee-$75.00. 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>    
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "csc244">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2>CSC 244: DATA STRUCTURES</h2>
+							<p class = "course-description">This course is the final course in the three-semester sequence begun in CSC 120 and CSC 121. The "classical data structures" (such as linked lists, stacks, queues, trees, and hash tables) will be covered. The student will spend considerable time in the computer lab writing programs. Prerequisite: CSC 121, CSC 235.  (Next Offered: Fall 2015) Lab Fee-$75.00. 4 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>    
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "csc337">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2>CSC 337: WEB/MOBILE GAME DEVELOPMENT</h2>
+							<p class = "course-description">Students will be introduced to the development process of large-scale applications through the individual and collaborative creation of substantial games.  Emphasis will be placed on sound software engineering design principles, independent learning, and team management.  Students will learn how to decompose large problems into smaller more manageable ones and will learn how to effectively use a distributed version control system such as Git.  The games will be developed as web applications and converted to native mobile apps via tools such as PhoneGap.  Prerequisite: CSC 120 and CIS/CSC 235 (Next Offered: Spring 2016) Lab Fee-$75.00. 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>    
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "csc352">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2>CSC 352: BACK-END WEB DEVELOPMENT</h2>
+							<p class = "course-description">Students will learn how to program servers and to create server-side applications using a modern runtime environment supporting asynchronous I/O such as Node.js and a NoSQL database such as MongoDB.  Throughout the course, an emphasis will be placed on solving problems using concurrent computation.  Students will create chat rooms, form processing scripts, and tools for web applications according to student interest.  Prerequisite: CSC 121 and CIS/CSC 235 (Next Offered: Fall 2016) Lab Fee-$75.00. 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>    
 						</div>
 					</div>
 					<div class = "col-md-1">
