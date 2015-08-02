@@ -13,6 +13,7 @@
 
 			var LARGE_SCREEN_SIZE = 900;
 			var inLargeMode = (window.innerWidth || document.documentElement.clientWidth) >= LARGE_SCREEN_SIZE;
+
 			// NAVIGATION
 
 			$("body").css("padding-top", "35px");
@@ -39,20 +40,39 @@
 				}
 			});
 
-			// SCROLL
+			// COURSE LINKS
 
-			$(".down-arrow").click(function() {
-				var offsetY = $("#csc120").offset().top-$("#top-level-nav").height();
-				console.log(offsetY);
+			// MAKE block appear at 1% opacity so you can scroll to it but preserving the fade in effect, which won't take place until it's sufficiently visible.  Scroll to correct location (accounting for nav bar) after 2s; add the href hash to the end of the link; then reposition to account for fixed navbar
+			$(".course-link").click(function() {
+				var courseHref = $.attr(this, 'href');
+				$(courseHref + " .course-description").css("display", "block");
+				$(courseHref + " .course-image").css("display", "block");
+				$(courseHref + " .course-description").css("opacity", .01);
+				$(courseHref + " .course-image").css("opacity", .01);
+
+				var offsetY = $(courseHref).offset().top-$("#top-level-nav").height();
+
 				$('body').animate({
         			scrollTop: offsetY
-    			}, 2000);
+    			}, 2000, function() {  				
+    				window.location.hash = courseHref;
+    				$('body').animate({
+        				scrollTop: offsetY
+    				}, 0)
+    			});
+				return false;
 			});
 
 			// COURSE DESCRIPTIONS
-
 			$(".course-description").css("display", "none");
 			$(".wheel").css("display", "none");
+
+			$(".close").click(function() {
+				var courseId = this.id.substring("close-".length);
+				$("#" + courseId + " .course-image").stop(true).fadeOut("slow");
+				$("#" + courseId + " .course-description").stop(true).fadeOut("slow");
+			});
+
 
 			$(window).on('DOMContentLoaded load resize scroll', function() {
 				$(".course").each(function() {
@@ -62,14 +82,20 @@
 					var neededVisibility = Math.min(windowHeight-navHeight,rect.height/2) - 1;
 					var actualVisibility = windowHeight - rect.top - Math.max(navHeight - rect.top, 0);
 
-					if(actualVisibility >= neededVisibility) {
-						$(".wheel").fadeIn("slow");
-						$(".course-description").fadeIn("slow");
-						$(".wheel").addClass("spin");
-						console.log("spin");
+					if(actualVisibility >= neededVisibility && $("#" + this.id + " .course-description").css("display") === "block") {
+						//$(".wheel").fadeIn("slow");
+						//$(".course-description").fadeIn("slow");
+						//$("#" + this.id + " .course-description").fadeIn("slow");
+						$("#" + this.id + " .course-image").fadeTo(600, 1.0);
+						$("#" + this.id + " .course-description").fadeTo(600, 1.0);
+						if(this.id === "csc120") {
+							$(".wheel").addClass("spin");
+							console.log("spin");
+						}
 					}
 				});
 			});
+
 		});
 		
 		</script>
@@ -90,7 +116,13 @@
 						<li id = "home-nav-item"><a href = "index.html" class = "nav-item">Home</a></li>
 						<!--<li id = "about-nav-item"><a href = "about.html" class = "nav-item">About Us</a></li>-->
 						<li id = "faculty-nav-item"><a href = "faculty.html" class = "nav-item">People</a></li>
-						<li id = "courses-nav-item" class = "active"><a href = "courses.html" class = "nav-item">Program &amp; Courses</a></li>
+						<li id = "courses-nav-item" class = "active"><a href = "courses.html" class = "nav-item">Program &amp; Courses</a> <!--<span class="caret"></span></a>
+
+							<ul class = "dropdown-menu">
+								<li>Computer Science</li>
+								<li>Computer Information Systems</li>
+							</ul>-->
+						</li>
 						<li id = "projects-nav-item"><a href = "projects.html" class = "nav-item">Projects</a></li>
 						<li id = "internships-nav-item"><a href = "internships.html" class = "nav-item">Internships</a></li>
 						<li id = "club-nav-item"><a href = "club.html" class = "nav-item">Club</a></li>
@@ -106,12 +138,68 @@
 						<h2>Program</h2>
 						<p>The Department of Math and Computer Studies offers the following degrees:</p>
 						<ul>
-							<li><a href = "#">B.A. in Computer Science</a> : Our computer science curriculum focuses on modern web and mobile development.  We teach core computer science concepts by using the Python and JavaScript programming languages as our primary tools.  As you work toward completing the requirements for the degree in computer science, you will be exposed to HTML5 and the Node.js runtime environment and popular web frameworks and libraries such as Bootstrap and JQuery.  You will also gain valuable industry experience through collaborative course projects and the required internship.  Upon graduating, you will have the skills necessary to create your own web applications and experience with web technologies that are used heavily by companies of all sizes. <a href = "#">Show Degree Requirements</a>
+							<li><a href = "#">B.A. in Computer Science</a> : Our computer science curriculum focuses on modern web and mobile development.  We teach core computer science concepts by using the Python and JavaScript programming languages as our primary tools.  As you work toward completing the requirements for the degree in computer science, you will be exposed to HTML5 and the Node.js runtime environment and popular web frameworks and libraries such as Bootstrap and JQuery.  You will also gain valuable industry experience through collaborative course projects and the required internship.  Upon graduating, you will have the skills necessary to create your own web applications and experience with web technologies that are used heavily by companies of all sizes.</li> <!--<a href = "#">Show Degree Requirements</a>-->
+							<h3>Degree Requirements</h3>
+							<p>All of the courses listed below are 3 credits, unless specified otherwise.  Major requirements are satisfied with a grade of C or better.  All other requirements can be fulfilled with passing grades.  Please refer to the Undergraduate College Catalog for the list of acceptable general education courses.</p>
+							<h4>General Education + Freshman Studies Requirements (42 credits)</h4>
+							<ul>
+								<li>Arts and Fine Arts (6 credits): Classes from two of the categories: Art History/Music History/Speech Communications</li>
+								<li>English and Modern Languages (9 credits): English 110, one Modern Language. and one from Modern Language/Literature</li>
+								<li>Social and Behavioral Sciences (9 credits): Classes from three of the categories: History, Political Science, Psychology, and Sociology</li>
+								<li>Science (3 credits): BIO/CHE/PHY Lab science preferred</li>
+								<li>Philosophy, Theology &amp; Religious Studies, and Ethics (9 credits): One philosophy (PHI/MAT324 preferred), one Theology and Religious Studies, and one Ethics course</li>
+								<li>Physical Education (1 credit)</li>
+								<li>Core Course (4 credits)</li>
+								<li>Freshman Studies (1 credit): Required of incoming freshmen and transfer students having fewer than 30 credits</li>
+							</ul>
+							<h4>Major Requirements (37 credits)</h4>
+							<ul>
+								<li><a href = "#csc120" class = "course-link">CSC 120: Programming I</a></li>
+								<li><a href = "#csc121" class = "course-link">CSC 121: Programming II</a></li>
+								<li><a href = "#csc229" class = "course-link">CSC/MAT 229: Discrete Mathematical Structures</a></li>
+								<li><a href = "#csc235" class = "course-link">CSC/CIS 235: Introduction to Web Scripting</a></li>
+								<li><a href = "#csc244" class = "course-link">CSC 244: Data Structures</a> (4 credits)</li>
+								<li><a href = "#csc460" class = "course-link">CSC 460: Internship I</a></li>
+								<li><a href = "#csc491" class = "course-link">CSC 491: Senior Seminar</a></li>
+								<li>Select 2 classes (for 6 credits) from the following:</li>
+								<ul>
+									<li><a href = "#csc323" class = "course-link">CSC 323: Assembly Language and Systems Programming</a></li>
+									<li><a href = "#csc330" class = "course-link">CSC 330: Operating Systems</a></li>
+									<li><a href = "#csc337" class = "course-link">CSC 337: Web/Mobile Game Development</a></li>
+									<li><a href = "#csc352" class = "course-link">CSC 352: Back-end Web Development</a></li>
+								</ul>
+								<li>Select 3 additional CIS or CSC electives (for at least 9 credits).  Below are some of the possibilities that are not mentioned in the choice of 2 above:</li>
+									<ul>
+										<li><a href = "#csc100" class = "course-link">CSC/CIS 100: Computer System Introduction</a></li>
+										<li><a href = "#csc102" class = "course-link">CSC/CIS 102: Computer Applications and CIS</a> or 
+										<a href = "#cis105" class = "course-link">CIS 105: Computer Applications for Business</a></li>
+										<li><a href = "#csc103" class = "course-link">CSC/CIS 103: Visual Programming</a></li>
+										<li><a href = "#cis112" class = "course-link">CIS 112: Introduction to Web Design and Development</a></li>
+										<li><a href = "#csc213" class = "course-link">CSC/CIS 213: Front-end Development</a></li>
+										<li><a href = "#cis224" class = "course-link">CIS 224: Introduction to Database Management</a></li>
+										<li><a href = "#cis255" class = "course-link">CIS 255: Computer Ethics and Security</a></li>
+										<li><a href = "#cis318" class = "course-link">CIS 318: Analysis and Logical Design of an Information System</a></li>
+										<li><a href = "#csc335" class = "course-link">CSC 335: Programming Languages</a></li>
+										<li><a href = "#cis339" class = "course-link">CIS 339: Networks I - Local Area Networks</a></li>
+										<li><a href = "#csc340" class = "course-link">CSC 340: Computer Architecture and Design</a> (4 credits)</li>
+										<li><a href = "#cis360" class = "course-link">CIS 360: Computer Information Systems in Business</a></li>
+									</ul>
+							</ul>
+							<h4>Related Requirements (17 credits)</h4>
+							<ul>
+								<li><a href = "#mat115" class = "course-link">MAT 115: Elementary Statistics</a> or <a href = "#mat225" class = "course-link">MAT 225: Statistics for the Natural Sciences</a> or <a href = "#mat115" class = "course-link">MAT 361: Probability and Mathematical Statistics</a></li>
+								<li><a href = "#mat221" class = "course-link">MAT 221: Calculus I (4 credits)</a></li>
+								<li><a href = "#mat222" class = "course-link">MAT 222: Calculus II (4 credits)</a></li>
+								<li><a href = "#mat228" class = "course-link">MAT 228: Topics in Discrete Mathematics for Computer Science Majors</a></li>
+								<li><a href = "#mat232" class = "course-link">MAT 232: Linear Algebra</a></li>
+							</ul>
+							<h4>Electives (32 credits or 33 if FST is not taken)</h4>
+							<p>A total of 128 credits is required for the B.A. in computer science.  A total of 90 of the credits taken must be LAS (Liberal Arts and Sciences).</p>
 							<!--Our computer science curriculum has a focus in web and mobile development. Our courses are taught primarilly using Python and JavaScript. We teach core computer science concepts while exposing you to popular web technologies such as .--></li>
 							<li><a href = "#">B.S. in Computer Information Systems</a> : </li>
 							<li><a href = "#">B.A. in Mathematics</a> : </li>
 						</ul>
-						<div class = "down-arrow-container"><a href = "#"><img src = "images/down-arrow.png" class = "down-arrow"></a></div>
+						<!--<div class = "down-arrow-container"><a href = "#"><img src = "images/down-arrow.png" class = "down-arrow"></a></div>-->
 					</div>
 			</div>
 			<div class = "row course" id = "csc120">
@@ -120,12 +208,12 @@
 					</div>
 					<div class = "col-md-5">
 						<div style = "text-align:center;vertical-align:middle;">
-							<img src = "images/american_roulette_wheel_layout.png" alt = "roulette wheel" class = "wheel">
+							<img src = "images/american_roulette_wheel_layout.png" alt = "roulette wheel" class = "wheel course-image">
 						</div>
 					</div>
 					<div class = "col-md-5">
 						<div class ="course-description" style = "">
-							<h2>CSC 120: PROGRAMMING I</h2>
+							<h2><button type = "button" class = "close" id = "close-csc120">&times;</button>CSC 120: PROGRAMMING I</h2>
 							<p class = "course-description">This course provides an accelerated introduction to computer programming in a readable scripting language such as Python.  The emphasis 
 							of the course will be on developing logical and algorithmic problem solving skills.  Students will learn how to state problems precisely 
 							and reason about the correctness of their code.  Topics include functions, conditional statements, loops, loop invariants, simulations, 
@@ -149,7 +237,8 @@
 					</div>
 					<div class = "col-md-5">
 						<div class ="course-description" style = "">
-							<h2>CSC 121: PROGRAMMING II</h2>
+							<!--<span class = "glyphicon glyphicon-remove"></span>-->
+							<h2><button type = "button" class = "close" id = "close-csc121">&times;</button>CSC 121: PROGRAMMING II</h2>
 							<p class = "course-description">This course is a continuation of CSC 120.  Students will continue to develop their algorithmic problem solving skills while being made increasingly aware of efficiency considerations.  Topics include recurrence relations, time and space complexity, divide and conquer algorithms, dynamic programming, functional programming and advanced data structures.  Students will solve real-world problems in multiple ways, analyzing the tradeoffs associated with each approach.  Prerequisite: CSC 120 (Next Offered: Spring 2016) Lab Fee-$75.00. 3 credits</p>
 							<p><span class = "featured">Featured course problem (The $1 Million Dollar Question - Literally!)</span>: Info to be added later.</p>    
 						</div>
@@ -168,7 +257,7 @@
 					</div>
 					<div class = "col-md-5">
 						<div class ="course-description" style = "">
-							<h2>CIS/CSC 103: VISUAL PROGRAMMING</h2>
+							<h2><button type = "button" class = "close" id = "close-csc103">&times;</button>CIS/CSC 103: VISUAL PROGRAMMING</h2>
 							<p class = "course-description">An introduction to computer programming through the use of drag-and-drop code blocks. The purpose of the course is to provide an introduction to programming logic and algorithmic problem solving strategies for students with little to no prior programming experience. Students will learn how to use the basic programming constructs such as variables, conditional statements, lists, loops and functions to solve problems by assembling and customizing blocks of code. They will also see how the visual blocks generate actual code and learn how to write some of their own in a friendly beginner language such as Python.  (Next Offered: Fall 2015) Lab Fee-$75.00. 3 credits</p>
 							<p><span class = "featured">Featured course problem</span>: To be added later.</p>    
 						</div>
@@ -187,7 +276,7 @@
 					</div>
 					<div class = "col-md-5">
 						<div class ="course-description" style = "">
-							<h2>CIS 112: INTRODUCTION TO WEB DESIGN AND DEVELOPMENT</h2>
+							<h2><button type = "button" class = "close" id = "close-cis112">&times;</button>CIS 112: INTRODUCTION TO WEB DESIGN AND DEVELOPMENT</h2>
 							<p class = "course-description">Students will learn how to create and design web pages using markup and stylesheet languages such as HTML and CSS.  Topics include selectors, inheritance, the box model, tables, page flow, forms, page validation, media, methods for creating multicolumn layouts along with the tradeoffs between them, and the fundamentals of responsive web design.  Students will also be introduced to various online tools that assist in web page creation and publishing.  Throughout the course, there will be an emphasis on the separation of structure and presentation and code readability and maintainability.  At the conclusion, students will create their own web sites that adhere to the principles and guidelines taught throughout the course.  (Next Offered: Fall 2015) Lab Fee-$75.00. 3 credits</p>
 							<p><span class = "featured">Featured course problem</span>: To be added later.</p>    
 						</div>
@@ -206,7 +295,7 @@
 					</div>
 					<div class = "col-md-5">
 						<div class ="course-description" style = "">
-							<h2>CIS/CSC 235: INTRODUCTION TO WEB SCRIPTING</h2>
+							<h2><button type = "button" class = "close" id = "close-csc235">&times;</button>CIS/CSC 235: INTRODUCTION TO WEB SCRIPTING</h2>
 							<p class = "course-description">An introduction to programming through the use of a web scripting language such as JavaScript.  Topics include variables, functions, conditional statements, loops, arrays, objects, and event handling.  Students will also learn about the Document Object Model and how to manipulate it to make interactive web pages.  The course culminates in the creation of a fully functional graphical web application game.  (Next Offered: Fall 2016) Lab Fee-$75.00. 3 credits</p>
 							<p><span class = "featured">Featured course problem</span>: To be added later.</p>    
 						</div>
@@ -215,7 +304,7 @@
 						<!--space with background-->
 					</div>
 			</div>
-			<div class = "row course" id = "csc212">
+			<div class = "row course" id = "csc213">
 					<div class = "col-md-1">
 						<!--space with background-->
 					</div>
@@ -225,7 +314,7 @@
 					</div>
 					<div class = "col-md-5">
 						<div class ="course-description" style = "">
-							<h2>CIS/CSC 213: FRONT-END WEB DEVELOPMENT</h2>
+							<h2><button type = "button" class = "close" id = "close-csc213">&times;</button>CIS/CSC 213: FRONT-END WEB DEVELOPMENT</h2>
 							<p class = "course-description">This course synthesizes and builds upon the principles of structured markup and design style covered in CIS 112 and scripting covered in CIS/CSC 235 in order to create fully interactive and engaging web pages.  Students will use the latest web technologies such as HTML5, CSS3, and JQuery for this purpose.  Topics will vary depending upon student interest, but will include client-server interaction, cross-browser and cross-platform support, mobile friendly user interface design, and code reuse and maintainability.  Prerequisite: CIS 112 and CIS/CSC 235 (Next Offered: Spring 2017) Lab Fee-$75.00. 3 credits</p>
 							<p><span class = "featured">Featured course problem</span>: To be added later.</p>    
 						</div>
@@ -244,8 +333,65 @@
 					</div>
 					<div class = "col-md-5">
 						<div class ="course-description" style = "">
-							<h2>CSC 244: DATA STRUCTURES</h2>
+							<h2><button type = "button" class = "close" id = "close-csc244">&times;</button>CSC 244: DATA STRUCTURES</h2>
 							<p class = "course-description">This course is the final course in the three-semester sequence begun in CSC 120 and CSC 121. The "classical data structures" (such as linked lists, stacks, queues, trees, and hash tables) will be covered. The student will spend considerable time in the computer lab writing programs. Prerequisite: CSC 121, CSC 235.  (Next Offered: Fall 2015) Lab Fee-$75.00. 4 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>    
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "csc323">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-csc323">&times;</button>CSC 323: ASSEMBLY LANGUAGE AND SYSTEMS PROGRAMMING</h2>
+							<p class = "course-description">This course will cover computer structure and machine language, assembly language and mnemonic operations, and symbolic addresses, in addition to assembler concepts, addressing techniques, string processing and compiler concepts. Prerequisites: CSC 121, 229, MAT 228 (Next Offered: TBD) Lab Fee-$75.00. 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>    
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "csc330">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-csc330">&times;</button>CSC 330: OPERATING SYSTEMS</h2>
+							<p class = "course-description">A study of the internal design of operating systems. Multiprogramming, file management, job and process scheduling, memory management, I/O device management, multiprocessor systems, network management. Pre- or corequesite: CSC 235 or 120. (Next Offered: TBD) Lab Fee-$75.00. 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>    
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "csc335">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-csc335">&times;</button>CSC 335: PROGRAMMING LANGUAGES</h2>
+							<p class = "course-description">Formal definition of programming languages including specification of syntax and semantics. A comparative analysis of various high level programming languages. Global properties including scope of declarations, storage allocation, grouping of statements and subroutines. Prerequisite: CSC 244. (Next Offered: Fall 2015) Lab Fee-$75.00. 3 credits</p>
 							<p><span class = "featured">Featured course problem</span>: To be added later.</p>    
 						</div>
 					</div>
@@ -263,8 +409,27 @@
 					</div>
 					<div class = "col-md-5">
 						<div class ="course-description" style = "">
-							<h2>CSC 337: WEB/MOBILE GAME DEVELOPMENT</h2>
+							<h2><button type = "button" class = "close" id = "close-csc337">&times;</button>CSC 337: WEB/MOBILE GAME DEVELOPMENT</h2>
 							<p class = "course-description">Students will be introduced to the development process of large-scale applications through the individual and collaborative creation of substantial games.  Emphasis will be placed on sound software engineering design principles, independent learning, and team management.  Students will learn how to decompose large problems into smaller more manageable ones and will learn how to effectively use a distributed version control system such as Git.  The games will be developed as web applications and converted to native mobile apps via tools such as PhoneGap.  Prerequisite: CSC 120 and CIS/CSC 235 (Next Offered: Spring 2016) Lab Fee-$75.00. 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>    
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "csc340">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-csc340">&times;</button>CSC 340: COMPUTER ARCHITECTURE AND DESIGN</h2>
+							<p class = "course-description">Introduction to the internal structure of computers. Logic design, Boolean algebra, gates and flip-flops, combinational and sequential circuits, registers, control mechanisms. Operating cycle, data and control flow in the computer, and machine format. Prerequisite: MAT 228 and CSC 229; Pre- or corequisite: CSC 120. (Next Offered: TBD) Lab Fee-$75.00. 4 credits</p>
 							<p><span class = "featured">Featured course problem</span>: To be added later.</p>    
 						</div>
 					</div>
@@ -282,9 +447,47 @@
 					</div>
 					<div class = "col-md-5">
 						<div class ="course-description" style = "">
-							<h2>CSC 352: BACK-END WEB DEVELOPMENT</h2>
-							<p class = "course-description">Students will learn how to program servers and to create server-side applications using a modern runtime environment supporting asynchronous I/O such as Node.js and a NoSQL database such as MongoDB.  Throughout the course, an emphasis will be placed on solving problems using concurrent computation.  Students will create chat rooms, form processing scripts, and tools for web applications according to student interest.  Prerequisite: CSC 121 and CIS/CSC 235 (Next Offered: Fall 2016) Lab Fee-$75.00. 3 credits</p>
+							<h2><button type = "button" class = "close" id = "close-csc352">&times;</button>CSC 352: BACK-END WEB DEVELOPMENT</h2>
+							<p class = "course-description">Students will learn how to program servers and to create server-side applications using a modern runtime environment supporting asynchronous I/O such as Node.js and a NoSQL database such as MongoDB.  Throughout the course, an emphasis will be placed on solving problems using concurrent computation.  Students will create chat rooms, form processing scripts, and tools for web applications according to student interest.  Prerequisite: CSC 121 and CIS/CSC 235. (Next Offered: Fall 2016) Lab Fee-$75.00. 3 credits</p>
 							<p><span class = "featured">Featured course problem</span>: To be added later.</p>    
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "csc460">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-csc460">&times;</button>CSC 460: Internship I</h2>
+							<p class = "course-description">A protracted field experience offering theory-practice opportunity in an area of Computer Science. Activities will be supervised by participating personnel at place of business. Course requires *4 to 15 one-hour seminar meetings* with a faculty sponsor, depending on the nature of the internship, a satisfactory rating by field supervisor and a minimum of 100 hours in the field for 3 credits.  Prerequisite: Junior or senior status and at least 12 completed CSC credits. (Offered upon request) 1-3 credits</p>
+							<!--<p><span class = "featured">Featured course problem</span>: To be added later.</p>-->    
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "csc491">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-csc491">&times;</button>CSC 491: CAPSTONE SEMINAR</h2>
+							<p class = "course-description">Students will undertake a substantial collaborative real-world programming project that requires the breadth of skills acquired from all of their courses, according to interest.  For example, a possibility would be to develop a substantial open-source web application that interacts with a server to serve the needs of a non-profit organization.  Pre- or corequisite: All other CSC courses required for the major. (Next Offered: Spring 2016) Lab Fee-$75.00. 3 credits</p>
+							<!--<p><span class = "featured">Featured course problem</span>: To be added later.</p>-->    
 						</div>
 					</div>
 					<div class = "col-md-1">
