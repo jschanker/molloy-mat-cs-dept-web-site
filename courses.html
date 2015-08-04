@@ -40,6 +40,18 @@
 				}
 			});
 
+			// DEGREE REQUIREMENT LINKS
+
+			$(".degree-requirements").css("display", "none");
+			$(".show-degree-reqs-link").click(function() {
+				if(this.text.indexOf("Show") === 0) {
+					this.text = "Hide" + this.text.substring(4);
+				} else {
+					this.text = "Show" + this.text.substring(4);
+				}
+				$("#" + this.id.substring(0,this.id.indexOf("-")) + "-degree-requirements").slideToggle("slow");
+			});
+
 			// COURSE LINKS
 
 			// MAKE block appear at 1% opacity so you can scroll to it but preserving the fade in effect, which won't take place until it's sufficiently visible.  Scroll to correct location (accounting for nav bar) after 2s; add the href hash to the end of the link; then reposition to account for fixed navbar
@@ -47,6 +59,8 @@
 				var courseHref = $.attr(this, 'href');
 				$(courseHref + " .course-description").css("display", "block");
 				$(courseHref + " .course-image").css("display", "block");
+				$(courseHref + " .course-image").css("margin-left", "auto");
+				$(courseHref + " .course-image").css("margin-right", "auto");
 				$(courseHref + " .course-description").css("opacity", .01);
 				$(courseHref + " .course-image").css("opacity", .01);
 
@@ -56,6 +70,23 @@
         			scrollTop: offsetY
     			}, 2000, function() {  				
     				window.location.hash = courseHref;
+    				$('body').animate({
+        				scrollTop: offsetY
+    				}, 0)
+    			});
+				return false;
+			});
+
+			// BACK TO TOP REQUIREMENTS
+
+			$(".to-reqs-link").click(function() {
+
+				var offsetY = $("#topContent").offset().top-$("#top-level-nav").height();
+
+				$('body').animate({
+        			scrollTop: offsetY
+    			}, 2000, function() {  				
+    				window.location.hash = "#topContent";
     				$('body').animate({
         				scrollTop: offsetY
     				}, 0)
@@ -138,68 +169,327 @@
 						<h2>Program</h2>
 						<p>The Department of Math and Computer Studies offers the following degrees:</p>
 						<ul>
-							<li><a href = "#">B.A. in Computer Science</a> : Our computer science curriculum focuses on modern web and mobile development.  We teach core computer science concepts by using the Python and JavaScript programming languages as our primary tools.  As you work toward completing the requirements for the degree in computer science, you will be exposed to HTML5 and the Node.js runtime environment and popular web frameworks and libraries such as Bootstrap and JQuery.  You will also gain valuable industry experience through collaborative course projects and the required internship.  Upon graduating, you will have the skills necessary to create your own web applications and experience with web technologies that are used heavily by companies of all sizes.</li> <!--<a href = "#">Show Degree Requirements</a>-->
-							<h3>Degree Requirements</h3>
-							<p>All of the courses listed below are 3 credits, unless specified otherwise.  Major requirements are satisfied with a grade of C or better.  All other requirements can be fulfilled with passing grades.  Please refer to the Undergraduate College Catalog for the list of acceptable general education courses.</p>
-							<h4>General Education + Freshman Studies Requirements (42 credits)</h4>
-							<ul>
-								<li>Arts and Fine Arts (6 credits): Classes from two of the categories: Art History/Music History/Speech Communications</li>
-								<li>English and Modern Languages (9 credits): English 110, one Modern Language. and one from Modern Language/Literature</li>
-								<li>Social and Behavioral Sciences (9 credits): Classes from three of the categories: History, Political Science, Psychology, and Sociology</li>
-								<li>Science (3 credits): BIO/CHE/PHY Lab science preferred</li>
-								<li>Philosophy, Theology &amp; Religious Studies, and Ethics (9 credits): One philosophy (PHI/MAT324 preferred), one Theology and Religious Studies, and one Ethics course</li>
-								<li>Physical Education (1 credit)</li>
-								<li>Core Course (4 credits)</li>
-								<li>Freshman Studies (1 credit): Required of incoming freshmen and transfer students having fewer than 30 credits</li>
-							</ul>
-							<h4>Major Requirements (37 credits)</h4>
-							<ul>
-								<li><a href = "#csc120" class = "course-link">CSC 120: Programming I</a></li>
-								<li><a href = "#csc121" class = "course-link">CSC 121: Programming II</a></li>
-								<li><a href = "#csc229" class = "course-link">CSC/MAT 229: Discrete Mathematical Structures</a></li>
-								<li><a href = "#csc235" class = "course-link">CSC/CIS 235: Introduction to Web Scripting</a></li>
-								<li><a href = "#csc244" class = "course-link">CSC 244: Data Structures</a> (4 credits)</li>
-								<li><a href = "#csc460" class = "course-link">CSC 460: Internship I</a></li>
-								<li><a href = "#csc491" class = "course-link">CSC 491: Senior Seminar</a></li>
-								<li>Select 2 classes (for 6 credits) from the following:</li>
+							<li>B.A. in Computer Science : Our computer science curriculum focuses on modern web and mobile development.  We teach core computer science concepts by using the Python and JavaScript programming languages as our primary tools.  As you work toward completing the requirements for the degree in computer science, you will be exposed to HTML5 and the Node.js runtime environment and popular web frameworks and libraries such as Bootstrap and JQuery.  You will also gain valuable industry experience through collaborative course projects and the required internship.  Upon graduating, you will have the skills necessary to create your own web applications and experience with web technologies that are used heavily by companies of all sizes. <a href = "#" class = "show-degree-reqs-link" id = "csc-show-degree-reqs-link">Show Degree Requirements</a></li>
+							<div id = "csc-degree-requirements" class = "degree-requirements">
+								<h3>CSC Degree Requirements</h3>
+								<p>All of the courses listed below are 3 credits, unless specified otherwise.  Major requirements are satisfied with a grade of C or better.  All other requirements can be fulfilled with passing grades.  Please refer to the <a href = "http://www.molloy.edu/Documents/Course%20Catalog/UndergraduateCourseCatalog.pdf">Undergraduate Course Catalog</a> for the list of acceptable general education courses.</p>
+								<h4>General Education + Freshman Studies Requirements (42 credits)</h4>
 								<ul>
-									<li><a href = "#csc323" class = "course-link">CSC 323: Assembly Language and Systems Programming</a></li>
-									<li><a href = "#csc330" class = "course-link">CSC 330: Operating Systems</a></li>
-									<li><a href = "#csc337" class = "course-link">CSC 337: Web/Mobile Game Development</a></li>
-									<li><a href = "#csc352" class = "course-link">CSC 352: Back-end Web Development</a></li>
+									<li>Arts and Fine Arts (6 credits): Classes from two of the categories: Art History/Music History/Speech Communications</li>
+									<li>English and Modern Languages (9 credits): English 110, one Modern Language, and one from Modern Language/Literature</li>
+									<li>Social and Behavioral Sciences (9 credits): Classes from three of the categories: History, Political Science, Psychology, and Sociology</li>
+									<li>Science (3 credits): BIO/CHE/PHY Lab science preferred</li>
+									<li>Philosophy, Theology &amp; Religious Studies, and Ethics (9 credits): One philosophy (PHI/MAT324 preferred), one Theology and Religious Studies, and one Ethics course</li>
+									<li>Physical Education (1 credit)</li>
+									<li>Core Course (4 credits)</li>
+									<li>Freshman Studies (1 credit): Required of incoming freshmen and transfer students having fewer than 30 credits</li>
 								</ul>
-								<li>Select 3 additional CIS or CSC electives (for at least 9 credits).  Below are some of the possibilities that are not mentioned in the choice of 2 above:</li>
+								<h4>Major Requirements (37 credits)</h4>
+								<ul>
+									<li><a href = "#csc120" class = "course-link">CSC 120: Programming I</a></li>
+									<li><a href = "#csc121" class = "course-link">CSC 121: Programming II</a></li>
+									<li><a href = "#csc229" class = "course-link">CSC/MAT 229: Discrete Mathematical Structures</a></li>
+									<li><a href = "#csc235" class = "course-link">CSC/CIS 235: Introduction to Web Scripting</a></li>
+									<li><a href = "#csc244" class = "course-link">CSC 244: Data Structures</a> (4 credits)</li>
+									<li><a href = "#csc460" class = "course-link">CSC 460: Internship I</a></li>
+									<li><a href = "#csc491" class = "course-link">CSC 491: Capstone Seminar</a></li>
+									<li>Select 2 classes (for 6 credits) from the following:</li>
 									<ul>
-										<li><a href = "#csc100" class = "course-link">CSC/CIS 100: Computer System Introduction</a></li>
-										<li><a href = "#csc102" class = "course-link">CSC/CIS 102: Computer Applications and CIS</a> or 
-										<a href = "#cis105" class = "course-link">CIS 105: Computer Applications for Business</a></li>
-										<li><a href = "#csc103" class = "course-link">CSC/CIS 103: Visual Programming</a></li>
-										<li><a href = "#cis112" class = "course-link">CIS 112: Introduction to Web Design and Development</a></li>
-										<li><a href = "#csc213" class = "course-link">CSC/CIS 213: Front-end Development</a></li>
-										<li><a href = "#cis224" class = "course-link">CIS 224: Introduction to Database Management</a></li>
-										<li><a href = "#cis255" class = "course-link">CIS 255: Computer Ethics and Security</a></li>
-										<li><a href = "#cis318" class = "course-link">CIS 318: Analysis and Logical Design of an Information System</a></li>
-										<li><a href = "#csc335" class = "course-link">CSC 335: Programming Languages</a></li>
-										<li><a href = "#cis339" class = "course-link">CIS 339: Networks I - Local Area Networks</a></li>
-										<li><a href = "#csc340" class = "course-link">CSC 340: Computer Architecture and Design</a> (4 credits)</li>
-										<li><a href = "#cis360" class = "course-link">CIS 360: Computer Information Systems in Business</a></li>
+										<li><a href = "#csc323" class = "course-link">CSC 323: Assembly Language and Systems Programming</a></li>
+										<li><a href = "#csc330" class = "course-link">CSC 330: Operating Systems</a></li>
+										<li><a href = "#csc337" class = "course-link">CSC 337: Web/Mobile Game Development</a></li>
+										<li><a href = "#csc352" class = "course-link">CSC 352: Back-end Web Development</a></li>
 									</ul>
-							</ul>
-							<h4>Related Requirements (17 credits)</h4>
-							<ul>
-								<li><a href = "#mat115" class = "course-link">MAT 115: Elementary Statistics</a> or <a href = "#mat225" class = "course-link">MAT 225: Statistics for the Natural Sciences</a> or <a href = "#mat115" class = "course-link">MAT 361: Probability and Mathematical Statistics</a></li>
-								<li><a href = "#mat221" class = "course-link">MAT 221: Calculus I (4 credits)</a></li>
-								<li><a href = "#mat222" class = "course-link">MAT 222: Calculus II (4 credits)</a></li>
-								<li><a href = "#mat228" class = "course-link">MAT 228: Topics in Discrete Mathematics for Computer Science Majors</a></li>
-								<li><a href = "#mat232" class = "course-link">MAT 232: Linear Algebra</a></li>
-							</ul>
-							<h4>Electives (32 credits or 33 if FST is not taken)</h4>
-							<p>A total of 128 credits is required for the B.A. in computer science.  A total of 90 of the credits taken must be LAS (Liberal Arts and Sciences).</p>
-							<!--Our computer science curriculum has a focus in web and mobile development. Our courses are taught primarilly using Python and JavaScript. We teach core computer science concepts while exposing you to popular web technologies such as .--></li>
-							<li><a href = "#">B.S. in Computer Information Systems</a> : </li>
-							<li><a href = "#">B.A. in Mathematics</a> : </li>
+									<li>Select 3 additional CIS or CSC electives (for at least 9 credits).  Below are some of the possibilities that are not mentioned in the choice of 2 above:</li>
+										<ul>
+											<li><a href = "#csc100" class = "course-link">CSC/CIS 100: Computer System Introduction</a></li>
+											<li><a href = "#csc102" class = "course-link">CSC/CIS 102: Computer Applications and CIS</a> or 
+											<a href = "#cis105" class = "course-link">CIS 105: Computer Applications for Business</a></li>
+											<li><a href = "#csc103" class = "course-link">CSC/CIS 103: Visual Programming</a></li>
+											<li><a href = "#cis112" class = "course-link">CIS 112: Introduction to Web Design and Development</a></li>
+											<li><a href = "#csc213" class = "course-link">CSC/CIS 213: Front-end Development</a></li>
+											<li><a href = "#cis224" class = "course-link">CIS 224: Introduction to Database Management</a></li>
+											<li><a href = "#cis255" class = "course-link">CIS 255: Computer Ethics and Security</a></li>
+											<li><a href = "#cis318" class = "course-link">CIS 318: Systems Analysis and Design</a></li>
+											<li><a href = "#csc335" class = "course-link">CSC 335: Programming Languages</a></li>
+											<li><a href = "#cis339" class = "course-link">CIS 339: Networks I - Local Area Networks</a></li>
+											<li><a href = "#csc340" class = "course-link">CSC 340: Computer Architecture and Design</a> (4 credits)</li>
+											<li><a href = "#cis360" class = "course-link">CIS/BUS 360: Computer Information Systems in Business</a></li>
+										</ul>
+								</ul>
+								<h4>Related Requirements (17 credits)</h4>
+								<ul>
+									<li><a href = "#mat115" class = "course-link">MAT 115: Elementary Statistics</a> or <a href = "#mat225" class = "course-link">MAT 225: Statistics for the Natural Sciences</a> or <a href = "#mat361" class = "course-link">MAT 361: Probability and Mathematical Statistics</a></li>
+									<li><a href = "#mat221" class = "course-link">MAT 221: Calculus I (4 credits)</a></li>
+									<li><a href = "#mat222" class = "course-link">MAT 222: Calculus II (4 credits)</a></li>
+									<li><a href = "#mat228" class = "course-link">MAT 228: Topics in Discrete Mathematics for Computer Science Majors</a></li>
+									<li><a href = "#mat232" class = "course-link">MAT 232: Introduction to Linear Algebra</a></li>
+								</ul>
+								<h4>Electives (32 credits or 33 if FST is not taken)</h4>
+								<p>A total of 128 credits is required for the B.A. in computer science.  A total of 90 of the credits taken must be LAS (Liberal Arts and Sciences).</p>
+								<!--Our computer science curriculum has a focus in web and mobile development. Our courses are taught primarilly using Python and JavaScript. We teach core computer science concepts while exposing you to popular web technologies such as .-->
+							</div>
+							<li>B.S. in Computer Information Systems : Our computer information systems curriculum includes courses in database management, networks, web development, systems analysis, and computer ethics taught by faculty with industry experience.  <a href = "#" class = "show-degree-reqs-link" id = "cis-show-degree-reqs-link">Show Degree Requirements</a></li>
+							<div id = "cis-degree-requirements" class = "degree-requirements">
+								<h3>CIS Degree Requirements</h3>
+								<p>All of the courses listed below are 3 credits, unless specified otherwise.  Major requirements are satisfied with a grade of C or better.  All other requirements can be fulfilled with passing grades.  Please refer to the <a href = "http://www.molloy.edu/Documents/Course%20Catalog/UndergraduateCourseCatalog.pdf">Undergraduate Course Catalog</a> for the list of acceptable general education courses.</p>
+								<h4>General Education + Freshman Studies Requirements (36 credits)</h4>
+								<ul>
+									<li>Arts and Fine Arts (3 credits): Classes from one of the categories: Art History/Music History</li>
+									<li>English and Modern Languages (9 credits): English 110, one Modern Language, and one from Modern Language/Literature</li>
+									<li>Social and Behavioral Sciences (9 credits): Classes from three of the categories: History, Political Science (POL 303 Recommended), Psychology, and Sociology (SOC 166 Recommended)</li>
+									<li>Science (3 credits): BIO/CHE/PHY Lab science preferred</li>
+									<li>Philosophy, Theology &amp; Religious Studies (6 credits): One philosophy and one Theology and Religious Studies</li>
+									<li>Physical Education (1 credit)</li>
+									<li>Core Course (4 credits)</li>
+									<li>Freshman Studies (1 credit): Required of incoming freshmen and transfer students having fewer than 30 credits</li>
+								</ul>
+								<h4>Major Requirements (36 credits)</h4>
+								<ul>
+									<li><a href = "#csc102" class = "course-link">CIS 102: Computer Applications and CIS</a></li>
+									<li><a href = "#cis112" class = "course-link">CIS 112: Introduction to Web Design and Development</a></li>
+									<li><a href = "#cis224" class = "course-link">CIS 224: Introduction to Database Management</a></li>
+									<li><a href = "#cis318" class = "course-link">CIS 318: Systems Analysis and Design</a></li>
+									<li><a href = "#cis339" class = "course-link">CIS 339: Networks I - Local Area Networks</a></li>
+									<li><a href = "#cis360" class = "course-link">CIS/BUS 360: Computer Information Systems in Business</a></li>
+									<li><a href = "#cis460" class = "course-link">CIS 460: Internship I</a></li>
+									<li><a href = "#cis491" class = "course-link">CIS 491: CIS Capstone Seminar</a></li>
+									<li>Select 2 classes (for 6 credits) from the following:</li>
+									<ul>
+										<li><a href = "#csc103" class = "course-link">CIS/CSC 103: Visual Programming</a></li>
+										<li><a href = "#csc120" class = "course-link">CSC 120: Programming I</a></li>
+										<li><a href = "#csc121" class = "course-link">CSC 121: Programming II</a></li>
+										<li><a href = "#csc235" class = "course-link">CIS/CSC 235: Introduction to Web Scripting</a></li>
+									</ul>
+									<li>Select 2 additional CIS or CSC electives (for at least 6 credits).  Below are some of the possibilities that are not mentioned in the choice of 2 above:</li>
+										<ul>
+											<li><a href = "#csc100" class = "course-link">CSC/CIS 100: Computer System Introduction</a></li>
+											<li><a href = "#csc213" class = "course-link">CSC/CIS 213: Front-end Development</a></li>
+											<li><a href = "#csc229" class = "course-link">CSC/MAT 229: Discrete Mathematical Structures</a></li>
+											<li><a href = "#csc244" class = "course-link">CSC 244: Data Structures</a> (4 credits)</li>
+											<li><a href = "#cis255" class = "course-link">CIS 255: Computer Ethics and Security</a></li>
+											<li><a href = "#csc323" class = "course-link">CSC 323: Assembly Language and Systems Programming</a></li>
+											<li><a href = "#csc330" class = "course-link">CSC 330: Operating Systems</a></li>
+											<li><a href = "#csc335" class = "course-link">CSC 335: Programming Languages</a></li>
+											<li><a href = "#csc337" class = "course-link">CSC 337: Web/Mobile Game Development</a></li>
+											<li><a href = "#csc340" class = "course-link">CSC 340: Computer Architecture and Design</a> (4 credits)</li>
+											<li><a href = "#csc352" class = "course-link">CSC 352: Back-end Web Development</a></li>
+										</ul>
+								</ul>
+								<h4>Related Requirements (27 credits)</h4>
+								<ul>
+									<li>BUS 101: Introduction to Business</li>
+									<li>BUS 260: Accounting I</li>
+									<li>BUS 301: Principles of Management</li>
+									<li>BUS 330: Principles of Marketing</li>
+									<li>COM 110: Experiences in Communication or COM 114: Small Group Discussion</li>
+									<li>ENG 236: Effective Business Writing</li>
+									<li>ETH 257: Business Ethics</li>
+									<li><a href = "#mat115" class = "course-link">MAT 115: Elementary Statistics</a></li>
+									<li><a href = "#mat116" class = "course-link">MAT 116: Algebra and Trigonometry</a> or <a href = "#mat118" class = "course-link">MAT 118: Pre-Calculus</a></li>
+								</ul>
+								<h4>Electives (29 credits or 30 if FST is not taken)</h4>
+								<p>A total of 128 credits is required for the B.S. in computer information systems.  A total of 60 of the credits taken must be LAS (Liberal Arts and Sciences).</p>
+								<!--Our computer science curriculum has a focus in web and mobile development. Our courses are taught primarilly using Python and JavaScript. We teach core computer science concepts while exposing you to popular web technologies such as .-->
+							</div>
+							<li>B.A. in Mathematics : <a href = "#" class = "show-degree-reqs-link" id = "mat-show-degree-reqs-link">Show Degree Requirements</a></li>
+							<div id = "mat-degree-requirements" class = "degree-requirements">
+								<h3>MATH Degree Requirements</h3>
+								<p>All of the courses listed below are 3 credits, unless specified otherwise.  Major requirements are satisfied with a grade of C or better.  All other requirements can be fulfilled with passing grades.  Please refer to the <a href = "http://www.molloy.edu/Documents/Course%20Catalog/UndergraduateCourseCatalog.pdf">Undergraduate Course Catalog</a> for the list of acceptable general education courses.</p>
+								<h4>General Education + Freshman Studies Requirements (39 credits)</h4>
+								<ul>
+									<li>Arts and Fine Arts (6 credits): Classes from two of the categories: Art History/Music History/Speech Communications</li>
+									<li>English and Modern Languages (9 credits): English 110, one Modern Language, and one from Modern Language/Literature</li>
+									<li>Social and Behavioral Sciences (9 credits): Classes from three of the categories: History, Political Science, Psychology, and Sociology</li>
+									<li>Philosophy, Theology &amp; Religious Studies, and Ethics (9 credits): One philosophy (PHI/MAT324 preferred), one Theology and Religious Studies, and one Ethics course</li>
+									<li>Physical Education (1 credit)</li>
+									<li>Core Course (4 credits)</li>
+									<li>Freshman Studies (1 credit): Required of incoming freshmen and transfer students having fewer than 30 credits</li>
+								</ul>
+								<h4>Major Requirements (42 credits)</h4>
+								<ul>
+									<li><a href = "#mat115" class = "course-link">MAT 115: Elementary Statistics</a> or <a href = "#mat225" class = "course-link">MAT 225: Statistics for the Natural Sciences</a></li>
+									<li><a href = "#mat221" class = "course-link">MAT 221: Calculus I (4 credits)</a></li>
+									<li><a href = "#mat222" class = "course-link">MAT 222: Calculus II (4 credits)</a></li>
+									<li><a href = "#mat223" class = "course-link">MAT 223: Calculus III (4 credits)</a></li>
+									<li><a href = "#csc229" class = "course-link">MAT/CSC 229: Discrete Mathematical Structures</a></li>
+									<li><a href = "#mat232" class = "course-link">MAT 232: Introduction to Linear Algebra</a></li>
+									<li><a href = "#mat251" class = "course-link">MAT 251: Modern Geometry</a></li>
+									<li><a href = "#mat324" class = "course-link">MAT 324: History and Philosophy of Mathematics</a></li>
+									<li><a href = "#mat330" class = "course-link">MAT 330: Modern Algebra - Ring Theory</a></li>
+									<li><a href = "#mat345" class = "course-link">MAT 345: Introduction to Real Analysis</a></li>
+									<li><a href = "#mat460" class = "course-link">MAT 460: Internship in Mathematics</a></li>
+									<li><a href = "#mat491" class = "course-link">MAT 491: Mathematics Senior Seminar</a></li>
+									<li>Select 1 class (for 3 credits) from the following:</li>
+									<ul>
+										<li><a href = "#mat331" class = "course-link">MAT 331: Number Theory</a></li>
+										<li><a href = "#mat335" class = "course-link">MAT 335: Modern Algebra - Group Theory</a></li>
+										<li><a href = "#mat336" class = "course-link">MAT 336: Operations Research</a></li>
+										<li><a href = "#mat342" class = "course-link">MAT 342: Differential Equations</a></li>
+										<li><a href = "#mat347" class = "course-link">MAT 347: Complex Variables</a></li>
+										<li><a href = "#mat356" class = "course-link">MAT 356: General Topology</a></li>
+										<li><a href = "#mat361" class = "course-link">MAT 361: Probability and Mathematical Statistics</a></li>
+									</ul>
+								</ul>
+								<h4>Related Requirements (9 credits)</h4>
+								<ul>
+									<li><a href = "#csc103" class = "course-link">CSC/CIS 103: Visual Programming</a> or <a href = "#csc120" class = "course-link">CSC 120: Programming I</a> or <a href = "#csc235" class = "course-link">CSC/CIS 235: Introduction to Web Scripting</a></li>
+									<li>Science with Lab/Gen Ed</li>
+									<li>Science with Lab</li>
+								</ul>
+								<h4>Electives (38 credits or 39 if FST is not taken)</h4>
+								<p>A total of 128 credits is required for the B.A. in mathematics.  A total of 90 of the credits taken must be LAS (Liberal Arts and Sciences).</p>
+								<!--Our computer science curriculum has a focus in web and mobile development. Our courses are taught primarilly using Python and JavaScript. We teach core computer science concepts while exposing you to popular web technologies such as .-->
+							</div>
+							<li>Mathematics Childhood Education</li>
+							<li>Mathematics Adolescence Education</li>
+						</ul>
+						<p>We also offer minors in Computer Science, Computer Information Systems, and Mathematics</p>
+						<ul>
+							<li>Minor in Computer Science: <a href = "#" class = "show-degree-reqs-link" id = "cscMin-show-degree-reqs-link">Show Requirements</a></li></li>
+							<div id = "cscMin-degree-requirements" class = "degree-requirements">
+								<h3>CSC Minor Requirements (22-23 credits)</h3>
+								<p>All of the courses listed below are 3 credits, unless specified otherwise.  Minor requirements are satisfied with a grade of C or better.</p>
+								<ul>
+									<li><a href = "#csc103" class = "course-link">CSC/CIS 103: Visual Programming</a></li>
+									<li><a href = "#csc120" class = "course-link">CSC 120: Programming I</a></li>
+									<li><a href = "#csc121" class = "course-link">CSC 121: Programming II</a></li>
+									<li><a href = "#csc235" class = "course-link">CSC/CIS 235: Introduction to Web Scripting</a></li>
+									<li><a href = "#csc244" class = "course-link">CSC 244: Data Structures</a> (4 credits)</li>
+									<li><a href = "#mat118" class = "course-link">MAT 118: Pre-Calculus</a> or <a href = "#mat221" class = "course-link">MAT 221: Calculus I</a> (4 credits)</li>
+									<li>Select 1 CIS or CSC elective (for 3 credits)</li>
+								</ul>
+							</div>
+							<li>Minor in Computer Information Systems: <a href = "#" class = "show-degree-reqs-link" id = "cisMin-show-degree-reqs-link">Show Requirements</a></li>
+							<div id = "cisMin-degree-requirements" class = "degree-requirements">
+								<h3>CIS Minor Requirements (21 credits)</h3>
+								<p>All of the courses listed below are 3 credits, unless specified otherwise.  Minor requirements are satisfied with a grade of C or better.</p>
+								<ul>
+									<li><a href = "#csc102" class = "course-link">CSC/CIS 102: Computer Applications and CIS</a> or 
+									<a href = "#cis105" class = "course-link">CIS 105: Computer Applications for Business</a></li>
+									<li><a href = "#csc103" class = "course-link">CSC/CIS 103: Visual Programming</a></li>
+									<li><a href = "#cis112" class = "course-link">CIS 112: Introduction to Web Design and Development</a></li>
+									<li><a href = "#cis224" class = "course-link">CIS 224: Introduction to Database Management</a></li>
+									<li><a href = "#cis360" class = "course-link">CIS/BUS 360: Computer Information Systems in Business</a></li>
+									<li><a href = "#mat115" class = "course-link">MAT 115: Elementary Statistics</a> or <a href = "#mat116" class = "course-link">MAT 116: Algebra and Trigonometry</a> or <a href = "#mat118" class = "course-link">MAT 118: Pre-Calculus</a> or <a href = "#mat225" class = "course-link">MAT 225: Statistics for the Natural Sciences</a></li>
+									<li>Select 1 CIS or CSC elective (for 3 credits)</li>
+								</ul>
+							</div>
+							<li>Minor in Mathematics: <a href = "#" class = "show-degree-reqs-link" id = "matMin-show-degree-reqs-link">Show  Requirements</a></li>
+							<div id = "matMin-degree-requirements" class = "degree-requirements">
+								<h3>MATH Minor Requirements (20-21 credits)</h3>
+								<p>All of the courses listed below are 3 credits, unless specified otherwise.  Minor requirements are satisfied with a grade of C or better.</p>
+								<ul>
+									<li><a href = "#mat115" class = "course-link">MAT 115: Elementary Statistics</a> or <a href = "#mat225" class = "course-link">MAT 225: Statistics for the Natural Sciences</a></li>
+									<li><a href = "#mat221" class = "course-link">MAT 221: Calculus I (4 credits)</a></li>
+									<li><a href = "#mat222" class = "course-link">MAT 222: Calculus II (4 credits)</a></li>
+									<li><a href = "#mat223" class = "course-link">MAT 223: Calculus III (4 credits)</a> or <a href = "#csc229" class = "course-link">MAT/CSC 229: Discrete Mathematical Structures</a></li>
+									<li><a href = "#mat232" class = "course-link">MAT 232: Introduction to Linear Algebra</a> or <a href = "#mat330" class = "course-link">MAT 330: Modern Algebra - Ring Theory</a></li>
+									<li>Select 1 math or CSC elective (for 3 credits)</li>
+								</ul>
+							</div>
 						</ul>
 						<!--<div class = "down-arrow-container"><a href = "#"><img src = "images/down-arrow.png" class = "down-arrow"></a></div>-->
+					</div>
+			</div>
+			<div class = "row course" id = "csc100">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-csc100">&times;</button>CIS/CSC 100: COMPUTER SYSTEM INTRODUCTION</h2>
+							<p class = "course-description">An introductory course consisting of a survey of themes pertinent to Computer Science and Computer Information Systems. Topics will range from the evolution of computers to an overview of basic computer concepts such as use of the computer, hardware components (CPU, memory, storage, I/O), the program design process, networks and digital media.  (Next Offered: TBD) Lab Fee-$75.00. 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>    
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "csc102">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-csc102">&times;</button>CIS/CSC 102: COMPUTER APPLICATIONS AND CIS</h2>
+							<p class = "course-description">Students will gain mastery of the use of personal computer operating system software and applications, such as word processing, spreadsheets, presentation software and database management software. This is a hands-on course in which the students will develop projects in each of these areas of office automation. The software used is Microsoft Office Suite, including Word, Excel, PowerPoint and Access in a Windows environment. This course covers material also taught in CIS 105 and will be noted as a repeat for students who have transferred or already completed CIS 105.  (Next Offered: Fall 2015) Lab Fee-$75.00. 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>     
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "csc103">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-csc103">&times;</button>CIS/CSC 103: VISUAL PROGRAMMING</h2>
+							<p class = "course-description">An introduction to computer programming through the use of drag-and-drop code blocks. The purpose of the course is to provide an introduction to programming logic and algorithmic problem solving strategies for students with little to no prior programming experience. Students will learn how to use the basic programming constructs such as variables, conditional statements, lists, loops and functions to solve problems by assembling and customizing blocks of code. They will also see how the visual blocks generate actual code and learn how to write some of their own in a friendly beginner language such as Python.  (Next Offered: Fall 2015) Lab Fee-$75.00. 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>     
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "cis105">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-cis105">&times;</button>CIS 105: COMPUTER APPLICATIONS FOR BUSINESS</h2>
+							<p class = "course-description">This course provides business students with in-depth, hands-on experience in the use of spreadsheet software for corporations. The student will be taught to use Excel in a wide range of business applications, including producing financial reports, managing budgets, forecasting demand and supporting management decision-making. Knowledge of PowerPoint will be used to develop professional presentations. The software used is the Microsoft Office Suite components of Excel and PowerPoint. This course covers material also taught in CIS 102 and will be noted as a repeat for students who have transferred or already completed CIS 102.  (Next Offered: Fall 2015) Lab Fee-$75.00. 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>   
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "cis112">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-cis112">&times;</button>CIS 112: INTRODUCTION TO WEB DESIGN AND DEVELOPMENT</h2>
+							<p class = "course-description">Students will learn how to create and design web pages using markup and stylesheet languages such as HTML and CSS.  Topics include selectors, inheritance, the box model, tables, page flow, forms, page validation, media, methods for creating multicolumn layouts along with the tradeoffs between them, and the fundamentals of responsive web design.  Students will also be introduced to various online tools that assist in web page creation and publishing.  Throughout the course, there will be an emphasis on the separation of structure and presentation and code readability and maintainability.  At the conclusion, students will create their own web sites that adhere to the principles and guidelines taught throughout the course.  (Next Offered: Fall 2015) Lab Fee-$75.00. 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>    
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
 					</div>
 			</div>
 			<div class = "row course" id = "csc120">
@@ -220,7 +510,8 @@
 							sets, lists, recursion, and inductive reasoning.  Prerequisite: SAT mathematics score of at least 540, CIS/CSC 103, or approval from 
 							department faculty member. (Next Offered: Fall 2015) Lab Fee-$75.00. 3 credits</p>
 							<p><span class = "featured">Featured course problem (Can you beat the odds?)</span>: The probability of the ball landing on black after a standard American Roulette wheel is spun is 18/38 = 9/19 &approx; 47.37%.  You start with 400 Molloy points.  You win 100 points if the ball lands on black and lose 100 if it lands on red or green.  If you play until you have 500 (net gain of 100) or lose all 400 points, how likely are you to win those points?</p>
-							<p>We can write a program to approximate this probability by simulating wheel spins for 100,000 attempts.  How likely are you to go up by 100 points?  The answer may surprise you, but be careful with this strategy because when you lose, you lose all of your points!</p>     
+							<p>We can write a program to approximate this probability by simulating wheel spins for 100,000 attempts.  How likely are you to go up by 100 points?  The answer may surprise you, but be careful with this strategy because when you lose, you lose all of your points!</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>     
 						</div>
 					</div>
 					<div class = "col-md-1">
@@ -240,64 +531,8 @@
 							<!--<span class = "glyphicon glyphicon-remove"></span>-->
 							<h2><button type = "button" class = "close" id = "close-csc121">&times;</button>CSC 121: PROGRAMMING II</h2>
 							<p class = "course-description">This course is a continuation of CSC 120.  Students will continue to develop their algorithmic problem solving skills while being made increasingly aware of efficiency considerations.  Topics include recurrence relations, time and space complexity, divide and conquer algorithms, dynamic programming, functional programming and advanced data structures.  Students will solve real-world problems in multiple ways, analyzing the tradeoffs associated with each approach.  Prerequisite: CSC 120 (Next Offered: Spring 2016) Lab Fee-$75.00. 3 credits</p>
-							<p><span class = "featured">Featured course problem (The $1 Million Dollar Question - Literally!)</span>: Info to be added later.</p>    
-						</div>
-					</div>
-					<div class = "col-md-1">
-						<!--space with background-->
-					</div>
-			</div>
-			<div class = "row course" id = "csc103">
-					<div class = "col-md-1">
-						<!--space with background-->
-					</div>
-					<div class = "col-md-5">
-						<div style = "text-align:center;vertical-align:middle;">
-						</div>
-					</div>
-					<div class = "col-md-5">
-						<div class ="course-description" style = "">
-							<h2><button type = "button" class = "close" id = "close-csc103">&times;</button>CIS/CSC 103: VISUAL PROGRAMMING</h2>
-							<p class = "course-description">An introduction to computer programming through the use of drag-and-drop code blocks. The purpose of the course is to provide an introduction to programming logic and algorithmic problem solving strategies for students with little to no prior programming experience. Students will learn how to use the basic programming constructs such as variables, conditional statements, lists, loops and functions to solve problems by assembling and customizing blocks of code. They will also see how the visual blocks generate actual code and learn how to write some of their own in a friendly beginner language such as Python.  (Next Offered: Fall 2015) Lab Fee-$75.00. 3 credits</p>
-							<p><span class = "featured">Featured course problem</span>: To be added later.</p>    
-						</div>
-					</div>
-					<div class = "col-md-1">
-						<!--space with background-->
-					</div>
-			</div>
-			<div class = "row course" id = "cis112">
-					<div class = "col-md-1">
-						<!--space with background-->
-					</div>
-					<div class = "col-md-5">
-						<div style = "text-align:center;vertical-align:middle;">
-						</div>
-					</div>
-					<div class = "col-md-5">
-						<div class ="course-description" style = "">
-							<h2><button type = "button" class = "close" id = "close-cis112">&times;</button>CIS 112: INTRODUCTION TO WEB DESIGN AND DEVELOPMENT</h2>
-							<p class = "course-description">Students will learn how to create and design web pages using markup and stylesheet languages such as HTML and CSS.  Topics include selectors, inheritance, the box model, tables, page flow, forms, page validation, media, methods for creating multicolumn layouts along with the tradeoffs between them, and the fundamentals of responsive web design.  Students will also be introduced to various online tools that assist in web page creation and publishing.  Throughout the course, there will be an emphasis on the separation of structure and presentation and code readability and maintainability.  At the conclusion, students will create their own web sites that adhere to the principles and guidelines taught throughout the course.  (Next Offered: Fall 2015) Lab Fee-$75.00. 3 credits</p>
-							<p><span class = "featured">Featured course problem</span>: To be added later.</p>    
-						</div>
-					</div>
-					<div class = "col-md-1">
-						<!--space with background-->
-					</div>
-			</div>
-			<div class = "row course" id = "csc235">
-					<div class = "col-md-1">
-						<!--space with background-->
-					</div>
-					<div class = "col-md-5">
-						<div style = "text-align:center;vertical-align:middle;">
-						</div>
-					</div>
-					<div class = "col-md-5">
-						<div class ="course-description" style = "">
-							<h2><button type = "button" class = "close" id = "close-csc235">&times;</button>CIS/CSC 235: INTRODUCTION TO WEB SCRIPTING</h2>
-							<p class = "course-description">An introduction to programming through the use of a web scripting language such as JavaScript.  Topics include variables, functions, conditional statements, loops, arrays, objects, and event handling.  Students will also learn about the Document Object Model and how to manipulate it to make interactive web pages.  The course culminates in the creation of a fully functional graphical web application game.  (Next Offered: Fall 2016) Lab Fee-$75.00. 3 credits</p>
-							<p><span class = "featured">Featured course problem</span>: To be added later.</p>    
+							<p><span class = "featured">Featured course problem (The $1 Million Dollar Question - Literally!)</span>: Info to be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>   
 						</div>
 					</div>
 					<div class = "col-md-1">
@@ -316,7 +551,69 @@
 						<div class ="course-description" style = "">
 							<h2><button type = "button" class = "close" id = "close-csc213">&times;</button>CIS/CSC 213: FRONT-END WEB DEVELOPMENT</h2>
 							<p class = "course-description">This course synthesizes and builds upon the principles of structured markup and design style covered in CIS 112 and scripting covered in CIS/CSC 235 in order to create fully interactive and engaging web pages.  Students will use the latest web technologies such as HTML5, CSS3, and JQuery for this purpose.  Topics will vary depending upon student interest, but will include client-server interaction, cross-browser and cross-platform support, mobile friendly user interface design, and code reuse and maintainability.  Prerequisite: CIS 112 and CIS/CSC 235 (Next Offered: Spring 2017) Lab Fee-$75.00. 3 credits</p>
-							<p><span class = "featured">Featured course problem</span>: To be added later.</p>    
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>   
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "cis224">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-cis224">&times;</button>CIS 224: INTRODUCTION TO DATABASE MANAGEMENT</h2>
+							<p class = "course-description">Through mastery of a database management system, students will explore the effective management and utilization of data. Topics of database theory will be introduced in conjunction with the specific capabilities of the software.  (Next Offered: Fall 2015) Lab Fee-$75.00. 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "csc229">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<!--<span class = "glyphicon glyphicon-remove"></span>-->
+							<h2><button type = "button" class = "close" id = "close-csc229">&times;</button>CSC/MAT 229: DISCRETE MATHEMATICAL STRUCTURES</h2>
+							<p class = "course-description">Discrete mathematics is the study of mathematical structures in which its objects are separated from each other. Topics include: the properties of sets and different types of relations on sets, various proof techniques (e.g. proof by contradiction, mathematical induction), basic principles of logic, boolean algebra and logic circuits, counting principles and an introduction to graph theory. Prerequisites: Three years of high school mathematics, including Algebra I, Geometry and Algebra 2; passing of the Algebra I Regents Examination; or equivalent. (Next Offered: Fall 2015) 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>   
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "csc235">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-csc235">&times;</button>CIS/CSC 235: INTRODUCTION TO WEB SCRIPTING</h2>
+							<p class = "course-description">An introduction to programming through the use of a web scripting language such as JavaScript.  Topics include variables, functions, conditional statements, loops, arrays, objects, and event handling.  Students will also learn about the Document Object Model and how to manipulate it to make interactive web pages.  The course culminates in the creation of a fully functional graphical web application game.  (Next Offered: Fall 2016) Lab Fee-$75.00. 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>   
 						</div>
 					</div>
 					<div class = "col-md-1">
@@ -335,7 +632,48 @@
 						<div class ="course-description" style = "">
 							<h2><button type = "button" class = "close" id = "close-csc244">&times;</button>CSC 244: DATA STRUCTURES</h2>
 							<p class = "course-description">This course is the final course in the three-semester sequence begun in CSC 120 and CSC 121. The "classical data structures" (such as linked lists, stacks, queues, trees, and hash tables) will be covered. The student will spend considerable time in the computer lab writing programs. Prerequisite: CSC 121, CSC 235.  (Next Offered: Fall 2015) Lab Fee-$75.00. 4 credits</p>
-							<p><span class = "featured">Featured course problem</span>: To be added later.</p>    
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>    
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "cis255">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-cis255">&times;</button>CIS 255: COMPUTER ETHICS AND SECURITY</h2>
+							<p class = "course-description">A study of ethical issues involved in computer technology and methods used to protect security. Questions deal with privacy, piracy, viruses, hackers, ownership of intellectual property, ownership of data specific to an individual, security of electronic transactions and reliability of programs essential to safety.  (Next Offered: Spring 2016) Lab Fee-$75.00. 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "cis318">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-cis318">&times;</button>CIS 318: SYSTEMS ANALYSIS AND DESIGN</h2>
+							<p class = "course-description">The concepts and tools for the analysis and design of information systems in business are presented. The focus is on structured analysis and design techniques using the ideas of logical data flow diagrams, extended entity-relationship models, user interface prototypes and process diagrams. The Systems Development Life Cycle, prototyping, feasibility studies and CASE tools are incorporated.  Prerequisite: CIS 224 (Next Offered: TBD) Lab Fee-$75.00. 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>
 						</div>
 					</div>
 					<div class = "col-md-1">
@@ -354,7 +692,8 @@
 						<div class ="course-description" style = "">
 							<h2><button type = "button" class = "close" id = "close-csc323">&times;</button>CSC 323: ASSEMBLY LANGUAGE AND SYSTEMS PROGRAMMING</h2>
 							<p class = "course-description">This course will cover computer structure and machine language, assembly language and mnemonic operations, and symbolic addresses, in addition to assembler concepts, addressing techniques, string processing and compiler concepts. Prerequisites: CSC 121, 229, MAT 228 (Next Offered: TBD) Lab Fee-$75.00. 3 credits</p>
-							<p><span class = "featured">Featured course problem</span>: To be added later.</p>    
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>   
 						</div>
 					</div>
 					<div class = "col-md-1">
@@ -373,7 +712,8 @@
 						<div class ="course-description" style = "">
 							<h2><button type = "button" class = "close" id = "close-csc330">&times;</button>CSC 330: OPERATING SYSTEMS</h2>
 							<p class = "course-description">A study of the internal design of operating systems. Multiprogramming, file management, job and process scheduling, memory management, I/O device management, multiprocessor systems, network management. Pre- or corequesite: CSC 235 or 120. (Next Offered: TBD) Lab Fee-$75.00. 3 credits</p>
-							<p><span class = "featured">Featured course problem</span>: To be added later.</p>    
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>    
 						</div>
 					</div>
 					<div class = "col-md-1">
@@ -392,7 +732,8 @@
 						<div class ="course-description" style = "">
 							<h2><button type = "button" class = "close" id = "close-csc335">&times;</button>CSC 335: PROGRAMMING LANGUAGES</h2>
 							<p class = "course-description">Formal definition of programming languages including specification of syntax and semantics. A comparative analysis of various high level programming languages. Global properties including scope of declarations, storage allocation, grouping of statements and subroutines. Prerequisite: CSC 244. (Next Offered: Fall 2015) Lab Fee-$75.00. 3 credits</p>
-							<p><span class = "featured">Featured course problem</span>: To be added later.</p>    
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>   
 						</div>
 					</div>
 					<div class = "col-md-1">
@@ -411,7 +752,28 @@
 						<div class ="course-description" style = "">
 							<h2><button type = "button" class = "close" id = "close-csc337">&times;</button>CSC 337: WEB/MOBILE GAME DEVELOPMENT</h2>
 							<p class = "course-description">Students will be introduced to the development process of large-scale applications through the individual and collaborative creation of substantial games.  Emphasis will be placed on sound software engineering design principles, independent learning, and team management.  Students will learn how to decompose large problems into smaller more manageable ones and will learn how to effectively use a distributed version control system such as Git.  The games will be developed as web applications and converted to native mobile apps via tools such as PhoneGap.  Prerequisite: CSC 120 and CIS/CSC 235 (Next Offered: Spring 2016) Lab Fee-$75.00. 3 credits</p>
-							<p><span class = "featured">Featured course problem</span>: To be added later.</p>    
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>   
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "cis339">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-cis339">&times;</button>CIS 339: NETWORKS I - LOCAL AREA NETWORKS</h2>
+							<p class = "course-description">Students will study the design, construction and management of local area networks. Topics covered will include: networking standards and the OSI model, network protocols, network media, physical and logical topologies including Ethernet and Token Rings, connectivity hardware including hubs, bridges, switches and routers and troubleshooting and maintaining local area networks. (Next Offered: TBD) Lab Fee-$75.00. 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>
 						</div>
 					</div>
 					<div class = "col-md-1">
@@ -430,7 +792,8 @@
 						<div class ="course-description" style = "">
 							<h2><button type = "button" class = "close" id = "close-csc340">&times;</button>CSC 340: COMPUTER ARCHITECTURE AND DESIGN</h2>
 							<p class = "course-description">Introduction to the internal structure of computers. Logic design, Boolean algebra, gates and flip-flops, combinational and sequential circuits, registers, control mechanisms. Operating cycle, data and control flow in the computer, and machine format. Prerequisite: MAT 228 and CSC 229; Pre- or corequisite: CSC 120. (Next Offered: TBD) Lab Fee-$75.00. 4 credits</p>
-							<p><span class = "featured">Featured course problem</span>: To be added later.</p>    
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>   
 						</div>
 					</div>
 					<div class = "col-md-1">
@@ -449,7 +812,48 @@
 						<div class ="course-description" style = "">
 							<h2><button type = "button" class = "close" id = "close-csc352">&times;</button>CSC 352: BACK-END WEB DEVELOPMENT</h2>
 							<p class = "course-description">Students will learn how to program servers and to create server-side applications using a modern runtime environment supporting asynchronous I/O such as Node.js and a NoSQL database such as MongoDB.  Throughout the course, an emphasis will be placed on solving problems using concurrent computation.  Students will create chat rooms, form processing scripts, and tools for web applications according to student interest.  Prerequisite: CSC 121 and CIS/CSC 235. (Next Offered: Fall 2016) Lab Fee-$75.00. 3 credits</p>
-							<p><span class = "featured">Featured course problem</span>: To be added later.</p>    
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>    
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "cis360">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-cis360">&times;</button>CIS/BUS 360: COMPUTER INFORMATION SYSTEMS IN BUSINESS</h2>
+							<p class = "course-description">This course examines the use of computer-based information systems in large, typically global corporations, to support the information needs of all levels of the organization. Students learn about the hardware and application software architecture, the organization issues, the system development processes and the decision support tools used in industry. The role of Information Technology in the corporation’s strategic plans and in providing a competitive advantage is studied.  Prerequisite: CIS 102 or CIS 105. (Next Offered: Fall 2015) Lab Fee-$75.00. 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>    
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "cis460">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-cis460">&times;</button>CIS 460: INTERNSHIP I</h2>
+							<p class = "course-description">A protracted field experience offering theory-practice opportunity in an area of Computer Information Systems. Activities will be supervised by participating personnel at place of business. Course requires a minimum of four one-hour and twenty-five minute class meetings with a faculty sponsor, a satisfactory rating by field supervisor and a minimum of 100 hours in the field for 3 credits.  Prerequisite: Junior or senior status and at least 12 completed CIS credits. (Offered upon request) 1-3 credits</p>
+							<!--<p><span class = "featured">Featured course problem</span>: To be added later.</p>-->
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>    
 						</div>
 					</div>
 					<div class = "col-md-1">
@@ -466,9 +870,30 @@
 					</div>
 					<div class = "col-md-5">
 						<div class ="course-description" style = "">
-							<h2><button type = "button" class = "close" id = "close-csc460">&times;</button>CSC 460: Internship I</h2>
-							<p class = "course-description">A protracted field experience offering theory-practice opportunity in an area of Computer Science. Activities will be supervised by participating personnel at place of business. Course requires *4 to 15 one-hour seminar meetings* with a faculty sponsor, depending on the nature of the internship, a satisfactory rating by field supervisor and a minimum of 100 hours in the field for 3 credits.  Prerequisite: Junior or senior status and at least 12 completed CSC credits. (Offered upon request) 1-3 credits</p>
-							<!--<p><span class = "featured">Featured course problem</span>: To be added later.</p>-->    
+							<h2><button type = "button" class = "close" id = "close-csc460">&times;</button>CSC 460: INTERNSHIP I</h2>
+							<p class = "course-description">A protracted field experience offering theory-practice opportunity in an area of Computer Science. Activities will be supervised by participating personnel at place of business. <!--Course requires *4 to 15 one-hour seminar meetings* with a faculty sponsor, depending on the nature of the internship,--> Course requires a minimum of four one-hour and twenty-five minute class meetings with a faculty sponsor, a satisfactory rating by field supervisor and a minimum of 100 hours in the field for 3 credits.  Prerequisite: Junior or senior status and at least 12 completed CSC credits. (Offered upon request) 1-3 credits</p>
+							<!--<p><span class = "featured">Featured course problem</span>: To be added later.</p>-->
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>   
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "cis491">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-cis491">&times;</button>CIS 491: CIS CAPSTONE SEMINAR</h2>
+							<p class = "course-description">Students will organize and operate as IS teams to complete the design and implementation of a significant information system. Project management of the IS function and systems integration will be components of the project experience. Prerequisite: All other required CIS courses; senior status. (Next Offered: Fall 2015) Lab Fee-$75.00. 3 credits</p>
+							<!--<p><span class = "featured">Featured course problem</span>: To be added later.</p>-->
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>   
 						</div>
 					</div>
 					<div class = "col-md-1">
@@ -487,7 +912,468 @@
 						<div class ="course-description" style = "">
 							<h2><button type = "button" class = "close" id = "close-csc491">&times;</button>CSC 491: CAPSTONE SEMINAR</h2>
 							<p class = "course-description">Students will undertake a substantial collaborative real-world programming project that requires the breadth of skills acquired from all of their courses, according to interest.  For example, a possibility would be to develop a substantial open-source web application that interacts with a server to serve the needs of a non-profit organization.  Pre- or corequisite: All other CSC courses required for the major. (Next Offered: Spring 2016) Lab Fee-$75.00. 3 credits</p>
-							<!--<p><span class = "featured">Featured course problem</span>: To be added later.</p>-->    
+							<!--<p><span class = "featured">Featured course problem</span>: To be added later.</p>-->
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>    
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "mat115">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-mat115">&times;</button>MAT 115: ELEMENTARY STATISTICS</h2>
+							<p class = "course-description">Elements of statistics; measures of central tendency; measures of dispersion; correlation; probability, normal distribution and the normal curve; testing hypotheses; chi-square test. This course repeats material also taught in MAT 114, 129 or 225 and is not open to students who have passed MAT 114, 129 or 225. Taking any of the statistics courses more than once will not earn additional credits and will be noted as a repeat. Prerequisites: Three years of high school mathematics including Algebra 1, Geometry and Algebra 2; passing of the Algebra 1 Regents Examination; or equivalent. (Next Offered: Fall 2015). 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>   
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "mat116">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-mat116">&times;</button>MAT 116: COLLEGE ALGEBRA AND TRIGONOMETRY</h2>
+							<p class = "course-description">This course is intended for the non-mathematics student who needs an enhanced foundation in Algebra and Trigonometry. The topics include algebraic and trigonometric functions and their graphs. Also covered are exponential and logarithmic functions and their graphs, systems of equations and inequalities. Prerequisites: Three years of high school mathematics, including Algebra 1, Geometry and Algebra 2; passing of the Algebra 1 Regents Examination; or equivalent. Not opened to students who have passed MAT 118 or MAT 221. (Next Offered: Fall 2015). 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>    
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "mat118">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-mat118">&times;</button>MAT 118: PRE-CALCULUS</h2>
+							<p class = "course-description">This course is for the mathematics major or students who meet the prerequisites listed below. The central theme of this course is a rigorous study of functions from an analytic, numerical, graphical and verbal approach. It includes linear, polynomial, rational, exponential, logarithmic and trigonometric functions. Also included is the study of systems of equations and inequalities, sequences, series and analytic geometry. Technology support using a graphing calculator is integrated throughout the course. Prerequisites: Three years of high school mathematics, including Algebra 1, Geometry and Algebra 2; passing of the Algebra 1 Regents Examination; or equivalent. Not opened to students who have passed MAT 221. (Next Offered: Spring 2016). 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>    
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "mat221">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-mat221">&times;</button>MAT 221: CALCULUS I</h2>
+							<p class = "course-description">Linear, exponential, logarithmic, power, polynomial and rational functions; inverse functions; trigonometric functions; limits and continuity; derivative definition and formulas; maxima and minima, concavity, curve sketching; definite and indefinite integrals; applications. Technology support using a graphing calculator is integrated throughout the course. Prerequisite: High School Precalculus or MAT 118 (Next Offered: Fall 2015). 4 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>   
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "mat222">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-mat222">&times;</button>MAT 222: CALCULUS II</h2>
+							<p class = "course-description">This course is a continuation of Calculus I, focusing on applications and techniques of integration. Additional topics include: indeterminates and L’Hopital’s rule, polar coordinates, convergence of sequences and series, Taylor and Maclaurin series. Prerequisite: MAT 221. (Next Offered: Spring 2016). 4 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>    
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "mat223">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-mat223">&times;</button>MAT 223: CALCULUS III</h2>
+							<p class = "course-description">Concepts such as limits, continuity, derivatives and integration are generalized for functions of several variables. Additional topics include: geometry of vectors, calculus of vector-valued functions, vector fields, line integrals, Green’s Theorem, Divergence Theorem and Stokes Theorem. Prerequisite: MAT 222. (Next Offered: Fall 2015). 4 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>   
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "mat225">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-mat225">&times;</button>MAT 225: STATISTICS FOR THE NATURAL SCIENCES</h2>
+							<p class = "course-description">Elements of statistics with their application to the sciences. Topics include descriptive statistics, probability, normal distribution and the normal curve, estimation and hypothesis testing, correlation and simple linear regression. This course repeats material also taught in MAT 114, 115 or 129 and is not open to students who have passed MAT 114, 115 or 129.  Taking any of the statistics courses more than once will not earn additional credits and will be noted as a repeat. Prerequisites: Three years of high school mathematics, including Algebra I, Geometry and Algebra 2; passing of the Algebra I Regents Examination; or equivalent. (Next Offered: Fall 2015). 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>    
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "mat228">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-mat228">&times;</button>MAT 228: TOPICS IN DISCRETE MATHEMATICS FOR COMPUTER SCIENCE MAJORS</h2>
+							<p class = "course-description">The course will cover material needed for computer science topics. It will delve deeper into number systems and switching algebra. Algorithms which look at computer-friendly ways to solve common problems will be covered in addition to the representation of sets as a data structure in the computer, graph theory and theorems on countability.  Co-requisite or prerequisite: MAT 229. (Next Offered: Spring 2016). 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>    
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "mat232">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-mat232">&times;</button>MAT 232: INTRODUCTION TO LINEAR ALGEBRA</h2>
+							<p class = "course-description">Basic concepts of vector spaces; independence, basis and dimension; linear transformations; matrices; determinants; systems of linear equations; eigenvectors and eigenvalues; dot product, cross product, generalized inner product and orthogonality. Prerequisite or co-requisite: MAT 222. (Next Offered: Spring 2016). 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>    
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "mat235">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-mat235">&times;</button>MAT 235: MATHEMATICAL MODELING</h2>
+							<p class = "course-description">This course is an introduction to mathematical modeling, a process of creating a mathematical representation of some phenomenon in order to gain a better understanding of that phenomenon. Examples range from creating models to study climate change as a result of increased levels of carbon dioxide in the atmosphere to predicting the stock market. We will be using a computer software extensively to learn how to construct, interpret and validate various models (e.g. discrete dynamical and continuous stochastic systems). Prerequisite: MAT 222. (Next Offered: TBD). 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>    
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>			
+			<div class = "row course" id = "mat251">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-mat251">&times;</button>MAT 251: MODERN GEOMETRY</h2>
+							<p class = "course-description">A study of Euclid’s Geometry (including selected significant proofs and constructions), Neutral Geometry, Parallel Postulate and Non-Euclidean Geometry, Geometric Transformations, Elliptic and Hyperbolic Geometry. Dynamic geometry software will be utilized to explore the concepts. Prerequisites: Three years of high school mathematics, including Algebra I, Geometry and Algebra 2; passing of the Algebra I Regents Examination; or equivalent. (Next Offered: Fall 2015). 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>    
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "mat324">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-mat324">&times;</button>MAT 324: HISTORY AND PHILOSOPHY OF MATHEMATICS</h2>
+							<p class = "course-description">A study of the contributions made by various individuals and cultures to the growth and development of ancient, modern and current mathematical topics. The approach to the course will be both chronological and topical. Prerequisites: Three years of high school mathematics, including Algebra I, Geometry and Algebra 2; passing of the Algebra I Regents Examination; or equivalent.  (Next Offered: Spring 2016). 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>    
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "mat330">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-mat330">&times;</button>MAT 330: MODERN ALGEBRA - RING THEORY</h2>
+							<p class = "course-description">Properties of rings and fields and their applications are explored. Topics include: factor rings, polynomial rings, integral domains, unique factorization domains, extension fields, finite fields, vector spaces and algebraic extensions. Prerequisite: MAT 229.  (Next Offered: Fall 2015). 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>    
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "mat331">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-mat331">&times;</button>MAT 331: NUMBER THEORY</h2>
+							<p class = "course-description">Properties of integers are explored. Topics include: divisibility, prime numbers, congruence relations, Diophantine equations, quadratic residues, Pythagorean triples and continued fractions. Prerequisites: MAT 330 or 232.  (Next Offered: Fall 2015). 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>   
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "mat335">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-mat335">&times;</button>MAT 335: MODERN ALGEBRA - GROUP THEORY</h2>
+							<p class = "course-description">Basic properties of groups and their applications are explored. Topics include: example of groups, group homomorphism, Lagrange’s Theorem, normal subgroups and Fundamental Theorem of Finite Abelian Groups. Prerequisite: MAT 229.  (Next Offered: TBD). 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>    
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "mat336">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-mat336">&times;</button>MAT 336: INTRODUCTION TO OPERATIONS RESEARCH</h2>
+							<p class = "course-description">Introduction to the mathematical programming components of Operations Research including linear programming as well as simple dynamic and integer programming. Mathematical models will be developed and solved using computer software for quantitative methods. Prerequisite or Co-requisite: MAT 232.  (Next Offered: TBD). 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>    
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "mat342">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-mat342">&times;</button>MAT 342: DIFFERENTIAL EQUATIONS</h2>
+							<p class = "course-description">The basic principles of solving ordinary differential equations are explored. Topics include: methods of solving first order differential equations, second order linear equations, power series solutions, system of equations, and existence and uniqueness theorems. Prerequisite: MAT 222.  (Next Offered: TBD). 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>   
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "mat345">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-mat345">&times;</button>MAT 345: INTRODUCTION TO REAL ANALYSIS</h2>
+							<p class = "course-description">A rigorous look at the topology of the real numbers (e.g. compact, connected), sequences and series, limits, continuity, differentiation and integration of functions, beginning with one and proceeding to several variables. Prerequisite: MAT 223.  (Next Offered: Spring 2016). 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>    
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "mat347">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-mat347">&times;</button>MAT 347: COMPLEX VARIABLES</h2>
+							<p class = "course-description">An introduction to complex-valued functions of a single variable. Topics may include: complex number system, analytical functions and their properties, power series of analytical functions, Cauchy Integral theorem, calculus of residues and contour integrals. Prerequiste: MAT 223  (Next Offered: TBD). 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>    
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "mat356">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-mat356">&times;</button>MAT 356: GENERAL TOPOLOGY</h2>
+							<p class = "course-description">An introduction to the fundamental principles of point-set topology. This course explores how basic properties of the real numbers such as continuity, convergence, connectedness and compactness can be generalized in a topological space. Other topics studied may include: product and quotient topologies, metric spaces, separation axioms and Tychonoff Theorem. Prerequisites: MAT 223, MAT 232.  (Next Offered: TBD). 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>   
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "mat361">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-mat361">&times;</button>MAT 361: PROBABILITY AND MATHEMATICAL STATISTICS</h2>
+							<p class = "course-description">This course covers the fundamentals of probability, different types of discrete and continuous distributions, expectation, sampling distributions, Central Limit Theorem, statistical inference and hypothesis testing. Prerequisites: MAT 222.  (Next Offered: TBD). 3 credits</p>
+							<p><span class = "featured">Featured course problem</span>: To be added later.</p>
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>    
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "mat460">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-mat460">&times;</button>MAT 460: INTERNSHIP IN MATHEMATICS</h2>
+							<p class = "course-description">A protracted field experience offering theory-practice opportunity. Activities will be supervised by participating personnel at place of business. Course requires a minimum of four one-hour and twenty-five minute class meetings with a faculty sponsor, a satisfactory rating by field supervisor and a minimum of 100 hours in the field for 3 credits.  Prerequisite: Junior status and advisor approval. (Offered upon request) 1-3 credits</p>
+							<!--<p><span class = "featured">Featured course problem</span>: To be added later.</p>-->
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p>    
+						</div>
+					</div>
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+			</div>
+			<div class = "row course" id = "mat491">
+					<div class = "col-md-1">
+						<!--space with background-->
+					</div>
+					<div class = "col-md-5">
+						<div style = "text-align:center;vertical-align:middle;">
+						</div>
+					</div>
+					<div class = "col-md-5">
+						<div class ="course-description" style = "">
+							<h2><button type = "button" class = "close" id = "close-mat491">&times;</button>MAT 491: MATHEMATICS SENIOR SEMINAR</h2>
+							<p class = "course-description">Required of all mathematics and mathematics education majors in their Senior year. Topics in modern mathematics. Prerequisite: Senior status.  (Next Offered: Spring 2016). 3 credits</p>
+							<!--<p><span class = "featured">Featured course problem</span>: To be added later.</p>-->
+							<p><a href = "#topContent" class = "to-reqs-link">Back to Top<!--Degree Requirements--></a></p> 
 						</div>
 					</div>
 					<div class = "col-md-1">
