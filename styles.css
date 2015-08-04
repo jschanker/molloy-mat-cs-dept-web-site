@@ -173,6 +173,20 @@ h2 {
 
 .course {
 	/*min-height: 50vh !important;*/
-	background-color:rgba(242, 84, 84, 1) !important;
 	vertical-align: middle !important;
+}
+
+.course:nth-child(3n) {
+  background-color:#333 !important;
+  color: #c8c8c8;
+}
+
+.course:nth-child(3n+1) {
+  /*background-color:rgba(51, 191, 182, 1) !important;*/
+  background-color:rgba(242, 84, 84, 1) !important;
+}
+
+.course:nth-child(3n+2) {
+  background-color:#232323 !important;
+  color: #c8c8c8;
 }
