@@ -8,7 +8,7 @@
 		<link href="bootstrap.min.css" rel="stylesheet">
 		<link href = "styles.css" type = "text/css" rel = "stylesheet">
 		<script src = "jquery/1.11.1/jquery.min.js"></script>
-		<script>
+		<!--<script>
 			$(document).ready(function() {
 				$("#nav-import").load("navigation.html", function(data) {
 					$("#home-nav-item").addClass('active');
@@ -16,10 +16,44 @@
 				});
 			});
 		</script>
-		<script src = "navigation.js"></script>
+		<script src = "navigation.js"></script>-->
+		<script>
+		$(document).ready(function() {
+
+			var LARGE_SCREEN_SIZE = 900;
+			var inLargeMode = (window.innerWidth || document.documentElement.clientWidth) >= LARGE_SCREEN_SIZE;
+
+			// NAVIGATION
+
+			$("body").css("padding-top", "35px");
+
+			$("#mobile-button").click(function() {
+				if( $(".navbar-nav").css("display") === $("#phantom-element").css("display") ) {
+					$("#phantom-element").slideToggle();
+				}
+				$(".navbar-nav").slideToggle();
+			});
+
+			$("nav").removeClass("navbar-static-top");
+			$("nav").addClass("navbar-fixed-top");
+
+			$(window).on('DOMContentLoaded load resize scroll', function() {
+				var windowWidth = window.innerWidth || document.documentElement.clientWidth;
+				if(windowWidth >= LARGE_SCREEN_SIZE) {
+					inLargeMode = true;
+					$(".nav").css("display", "block");
+				}
+				else if(inLargeMode && $(".navbar-nav").css("display") !== $("#phantom-element").css("display")) {
+					inLargeMode = false;
+					$("#phantom-element").slideToggle(0);
+				}
+			});
+		});
+		
+		</script>
 	</head>
 	<body>
-		<div id = "nav-import">
+		<!--<div id = "nav-import">
 		</div>
 		<div class = "container-fluid">
 			<div class = "row" id = "topContent">
@@ -28,6 +62,51 @@
 						<h1 class = "section-title">Department of Math and Computer Studies</h1>
 						<h2>About Us</h2>
 						<p></p>
+					</div>
+				</div>
+			</div>
+		</div>-->
+		<nav class = "navbar navbar-inverse navbar-static-top" id = "top-level-nav">
+			<div class = "container-fluid">
+				<div class = "navbar-header">
+					<a class = "navbar-brand nav-item" href = "#">Math and Computer Studies | <small><img src = "images/molloy_logo_128x79_ga.png" style = "max-height:100%"></small></a>
+					<button type="button" class="navbar-toggle" id = "mobile-button"> 
+            			<span class="icon-bar"></span>
+            			<span class="icon-bar"></span>
+            			<span class="icon-bar"></span>
+          			</button>
+          		</div>
+				<div class = "navbar-header" id = "navbar-menu">
+					<ul class = "nav navbar-nav">
+						<li id = "home-nav-item" class = "active"><a href = "index.html" class = "nav-item">Home</a></li>
+						<!--<li id = "about-nav-item"><a href = "about.html" class = "nav-item">About Us</a></li>-->
+						<li id = "faculty-nav-item"><a href = "faculty.html" class = "nav-item">People</a></li>
+						<li id = "courses-nav-item"><a href = "courses.html" class = "nav-item">Program &amp; Courses</a> <!--<span class="caret"></span></a>
+
+							<ul class = "dropdown-menu">
+								<li>Computer Science</li>
+								<li>Computer Information Systems</li>
+							</ul>-->
+						</li>
+						<li id = "projects-nav-item"><a href = "projects.html" class = "nav-item">Projects</a></li>
+						<li id = "internships-nav-item"><a href = "internships.html" class = "nav-item">Internships</a></li>
+						<li id = "club-nav-item"><a href = "club.html" class = "nav-item">Club</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class = "container-fluid center-padding">
+			<div class = "row" id = "topContent">
+				<span id = "phantom-element"></span>
+				<div class = "faculty">
+					<div class = "col-md-12">
+						<h1 class = "section-title">Department of Math and Computer Studies</h1>
+						<h2>About Us</h2>
+						<p>The Department of Math and Computer Studies at Molloy College offers <a href = "courses.html">bachelor degrees</a> in Mathematics, Computer Science, Computer Information Systems, and both bachelor and master degrees in Childhood and Adolescence Math Education.</p>
+
+						<p>Students get personal attention from our faculty.  With the exception of required CIS courses for Business majors (CIS 105 and CIS 360), all of our computer courses have no more than 15 students while all of our math and computer courses are capped at 25.  Our professors collaborate with students on their personal <a href = "projects.html">projects</a> of interest, offer graduate school and career advice, and personally guide students through the registration process every semester when they sign up for classes.</p>
+
+						<p>Molloy College is a teaching school, which means the quality of education is at the forefront.  Our courses are constantly evolving to incorporate technology and teaching methodologies at the bleeding edge.  From holding management positions in Information Technology at Hoffmann-La Roche, IBM, and Avis Budget Group to developing iPhone apps receiving over a quarter of a million downloads, our faculty have real-world experience that we leverage in order to help provide our students with the skills needed to pursue successful careers.</p>
 					</div>
 				</div>
 			</div>
