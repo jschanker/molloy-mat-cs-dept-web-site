@@ -1,0 +1,192 @@
+<!doctype html>
+
+<html>
+    <head>
+        <title>Math and Computer Studies | Molloy College</title>
+        <meta charset = "utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="bootstrap.min.css" rel="stylesheet">
+		<link href = "styles.css" type = "text/css" rel = "stylesheet">
+		<script src = "jquery/1.11.1/jquery.min.js"></script>
+		<script>
+		$(document).ready(function() {
+
+			var LARGE_SCREEN_SIZE = 900;
+			var inLargeMode = (window.innerWidth || document.documentElement.clientWidth) >= LARGE_SCREEN_SIZE;
+
+			// NAVIGATION
+
+			$("body").css("padding-top", "35px");
+
+			$("#mobile-button").click(function() {
+				if( $(".navbar-nav").css("display") === $("#phantom-element").css("display") ) {
+					$("#phantom-element").slideToggle();
+				}
+				$(".navbar-nav").slideToggle();
+			});
+
+			$("nav").removeClass("navbar-static-top");
+			$("nav").addClass("navbar-fixed-top");
+
+			$(window).on('DOMContentLoaded load resize scroll', function() {
+				var windowWidth = window.innerWidth || document.documentElement.clientWidth;
+				if(windowWidth >= LARGE_SCREEN_SIZE) {
+					inLargeMode = true;
+					$(".nav").css("display", "block");
+				}
+				else if(inLargeMode && $(".navbar-nav").css("display") !== $("#phantom-element").css("display")) {
+					inLargeMode = false;
+					$("#phantom-element").slideToggle(0);
+				}
+			});
+
+			// DEGREE REQUIREMENT LINKS
+
+			$(".degree-requirements").css("display", "none");
+			$(".show-degree-reqs-link").click(function() {
+				if(this.text.indexOf("Show") === 0) {
+					this.text = "Hide" + this.text.substring(4);
+				} else {
+					this.text = "Show" + this.text.substring(4);
+				}
+				$("#" + this.id.substring(0,this.id.indexOf("-")) + "-degree-requirements").slideToggle("slow");
+			});
+
+		});
+		
+		</script>
+	</head>
+	<body>
+		<nav class = "navbar navbar-inverse navbar-static-top" id = "top-level-nav">
+			<div class = "container-fluid">
+				<div class = "navbar-header">
+					<a class = "navbar-brand nav-item" href = "#">Math and Computer Studies | <small><img src = "images/molloy_logo_128x79_ga.png" style = "max-height:100%"></small></a>
+					<button type="button" class="navbar-toggle" id = "mobile-button"> 
+            			<span class="icon-bar"></span>
+            			<span class="icon-bar"></span>
+            			<span class="icon-bar"></span>
+          			</button>
+          		</div>
+				<div class = "navbar-header" id = "navbar-menu">
+					<ul class = "nav navbar-nav">
+						<li id = "home-nav-item"><a href = "index.html" class = "nav-item">Home</a></li>
+						<!--<li id = "about-nav-item"><a href = "about.html" class = "nav-item">About Us</a></li>-->
+						<li id = "faculty-nav-item"><a href = "faculty.html" class = "nav-item">People</a></li>
+						<li id = "courses-nav-item"><a href = "courses.html" class = "nav-item">Program &amp; Courses</a> <!--<span class="caret"></span></a>
+
+							<ul class = "dropdown-menu">
+								<li>Computer Science</li>
+								<li>Computer Information Systems</li>
+							</ul>-->
+						</li>
+						<li id = "projects-nav-item"><a href = "projects.html" class = "nav-item">Projects</a></li>
+						<li id = "internships-nav-item"><a href = "internships.html" class = "nav-item">Internships</a></li>
+						<li id = "club-nav-item" class = "active"><a href = "club.html" class = "nav-item">Club</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class = "container-fluid center-padding">
+			<div class = "row" id = "topContent">
+				<div class = "col-md-12">
+					<span id = "phantom-element"></span>
+					<h1 class = "section-title">Department of Math and Computer Studies</h1>
+					<h2>MACS Math and Computer Studies Club</h2>
+					<p>The purpose of the Math and Computer Studies Club (MaCS) is to promote the interest of mathematics and computer studies at Molloy, and to engage students, through interaction with faculty, alumni and those that are established in the industry, by applying the knowledge to research and industry.  For more information, email <a href = "mailto:MaCS@lions.molloy.edu">MaCS@lions.molloy.edu</a>.</p>
+					<p>Join our Facebook group, Math and Computer Studies Club (MaCS).</p>
+					<p>For more information, email <a href = "mailto:MaCS@lions.molloy.edu">MaCS@lions.molloy.edu</a>.</p>
+					<h3>MaCS Moderators</h3>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "faculty-member">
+					<div class = "col-md-4">
+						<img src = "images/upton.jpg" alt = "Deborah Upton, Ed.D., Chair" class = "img-rounded img-responsive img-faculty">
+					</div>
+					<div class = "col-md-8">
+						Deborah Upton, Ed.D.<br>
+						Chairperson, Associate Professor<br>
+						Co-Advisors: Math and Computer Science Club<br>
+						Kappa Mu Epsilon: NY Rho<br>
+						<a href = "mailto:dupton@molloy.edu">dupton@molloy.edu</a><br>
+						516.323.3432
+					</div>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "faculty-member">
+					<div class = "col-md-4">
+						<img src = "images/tse.jpg" alt = "Manyiu Tse, Ph.D." class = "img-rounded img-responsive img-faculty">
+					</div>
+					<div class = "col-md-8">
+						Manyiu Tse, Ph.D.<br>
+						Associate Professor<br>
+						<a href = "mailto:mtse@molloy.edu">mtse@molloy.edu</a><br>
+						516.323.3429
+					</div>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "col-md-12">
+					<h3>MaCS Officers (2015-2016)</h3>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "faculty-member">
+					<div class = "col-md-4">
+						<img src = "images/novak.png" alt = "Samantha Novak" class = "img-rounded img-responsive img-faculty">
+					</div>
+					<div class = "col-md-8">
+						Samantha Novak<br>
+						President<br>
+						<a href = "mailto:SNovak@lions.molloy.edu">SNovak@lions.molloy.edu</a>
+					</div>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "faculty-member">
+					<div class = "col-md-4">
+						<img src = "images/drexler.jpg" alt = "Samantha Drexler" class = "img-rounded img-responsive img-faculty">
+					</div>
+					<div class = "col-md-8">
+						Samantha Drexler<br>
+						Vice President<br>
+						<a href = "mailto:SDrexler@lions.molloy.edu">SDrexler@lions.molloy.edu</a>
+					</div>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "faculty-member">
+					<div class = "col-md-4">
+						<img src = "images/vargas.png" alt = "Santiago Vargas" class = "img-rounded img-responsive img-faculty">
+					</div>
+					<div class = "col-md-8">
+						Santiago Vargas<br>
+						Secretary<br>
+						<a href = "mailto:SVargas@lions.molloy.edu">Svargas@lions.molloy.edu</a>
+					</div>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "faculty-member">
+					<div class = "col-md-4">
+						<img src = "images/huang.png" alt = "Ruxiang (Steve) Huang" class = "img-rounded img-responsive img-faculty">
+					</div>
+					<div class = "col-md-8">
+						Ruxiang (Steve) Huang<br>
+						Treasurer<br>
+						<a href = "mailto:RHuang@lions.molloy.edu">RHuang@lions.molloy.edu</a>
+					</div>
+				</div>
+			</div>			
+					<!--<ul>
+						<li>President: Samantha Novak, <a href = "SNovak@lions.molloy.edu">SNovak@lions.molloy.edu</a></li>
+						<li>Vice President: Samantha Drexler, <a href = "SDrexler@lions.molloy.edu">SDrexler@lions.molloy.edu</a></li>
+						<li>Secretary: Santiago Vargas, <a href = "SVargas@lions.molloy.edu">Svargas@lions.molloy.edu</a></li>
+						<li>Treasurer: Ruxiang (Steve) Huang, <a href = "RHuang@lions.molloy.edu">RHuang@lions.molloy.edu</a></li>
+					</ul>
+				</div>
+			</div>-->
+		</div>
+	</body>
+</html>
