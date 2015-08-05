@@ -1,0 +1,152 @@
+<!doctype html>
+
+<html>
+	<head>
+		<title>Math and Computer Studies | Molloy College</title>
+		<meta charset = "utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="bootstrap.min.css" rel="stylesheet">
+		<link href = "styles.css" type = "text/css" rel = "stylesheet">
+		<script src = "jquery/1.11.1/jquery.min.js"></script>
+		<!--<script>
+			$(document).ready(function() {
+				$("#nav-import").load("navigation.html", function(data) {
+					$("#home-nav-item").addClass('active');
+					$("#topContent").css('margin-top', $("nav").outerHeight(false));
+				});
+			});
+		</script>
+		<script src = "navigation.js"></script>-->
+		<script>
+		$(document).ready(function() {
+
+			var LARGE_SCREEN_SIZE = 900;
+			var inLargeMode = (window.innerWidth || document.documentElement.clientWidth) >= LARGE_SCREEN_SIZE;
+
+			// NAVIGATION
+
+			$("body").css("padding-top", "35px");
+
+			$("#mobile-button").click(function() {
+				if( $(".navbar-nav").css("display") === $("#phantom-element").css("display") ) {
+					$("#phantom-element").slideToggle();
+				}
+				$(".navbar-nav").slideToggle();
+			});
+
+			$("nav").removeClass("navbar-static-top");
+			$("nav").addClass("navbar-fixed-top");
+
+			$(window).on('DOMContentLoaded load resize scroll', function() {
+				var windowWidth = window.innerWidth || document.documentElement.clientWidth;
+				if(windowWidth >= LARGE_SCREEN_SIZE) {
+					inLargeMode = true;
+					$(".nav").css("display", "block");
+				}
+				else if(inLargeMode && $(".navbar-nav").css("display") !== $("#phantom-element").css("display")) {
+					inLargeMode = false;
+					$("#phantom-element").slideToggle(0);
+				}
+			});
+
+		});
+		
+		</script>
+	</head>
+	<body>
+		<!--<div id = "nav-import">
+		</div>
+		<div class = "container-fluid">
+			<div class = "row" id = "topContent">
+				<div class = "faculty">
+					<div class = "col-md-12">
+						<h1 class = "section-title">Department of Math and Computer Studies</h1>
+						<h2>About Us</h2>
+						<p></p>
+					</div>
+				</div>
+			</div>
+		</div>-->
+		<nav class = "navbar navbar-inverse navbar-static-top" id = "top-level-nav">
+			<div class = "container-fluid">
+				<div class = "navbar-header">
+					<a class = "navbar-brand nav-item" href = "#">Math and Computer Studies | <small><img src = "images/molloy_logo_128x79_ga.png" style = "max-height:100%"></small></a>
+					<button type="button" class="navbar-toggle" id = "mobile-button"> 
+            			<span class="icon-bar"></span>
+            			<span class="icon-bar"></span>
+            			<span class="icon-bar"></span>
+          			</button>
+          		</div>
+				<div class = "navbar-header" id = "navbar-menu">
+					<ul class = "nav navbar-nav">
+						<li id = "home-nav-item"><a href = "index.html" class = "nav-item">Home</a></li>
+						<!--<li id = "about-nav-item"><a href = "about.html" class = "nav-item">About Us</a></li>-->
+						<li id = "faculty-nav-item"><a href = "faculty.html" class = "nav-item">People</a></li>
+						<li id = "courses-nav-item"><a href = "courses.html" class = "nav-item">Program &amp; Courses</a> <!--<span class="caret"></span></a>
+
+							<ul class = "dropdown-menu">
+								<li>Computer Science</li>
+								<li>Computer Information Systems</li>
+							</ul>-->
+						</li>
+						<li id = "projects-nav-item" class = "active"><a href = "projects.html" class = "nav-item">Projects</a></li>
+						<li id = "internships-nav-item"><a href = "internships.html" class = "nav-item">Internships</a></li>
+						<li id = "club-nav-item"><a href = "club.html" class = "nav-item">Club</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class = "container-fluid center-padding">
+			<div class = "row" id = "topContent">
+				<div class = "faculty">
+					<span id = "phantom-element"></span>
+					<div class = "col-md-12">
+						<h1 class = "section-title">Department of Math and Computer Studies</h1>
+						<h2>Projects</h2>
+						<p>Here are a few of the projects that we're currently working on:</p>
+					</div>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "faculty-member">
+					<div class = "col-md-4">
+						<a href = "https://github.com/zach111694/molloyLife"><img src = "images/molloyLifeLogo.jpg" alt = "Molloy Life Logo" class = "img-rounded img-responsive img-faculty"></a>
+					</div>
+					<div class = "col-md-8">
+						<h3>Molloy Life App</h3>
+						<p><!--Spearheaded-->Initiated by Molloy College student Zach Yuzon, the Molloy Life app aggregates data about on-campus student organizations, events, and other information of interest to Molloy students and displays it in a mobile friendly way.  Collaborating on the project is fellow Molloy College student Santiago Vargas, Rochester Institute of Technology student Joseph DeSimpliciis, and Molloy College Assistant Professor Jason Schanker.  The app was created with HTML and JavaScript and makes uses of the Bootsrap CSS framework, the runtime environment Node.js, and the Node.js web application framework Express.js.  See the project in its current state on <a href = "https://github.com/zach111694/molloyLife">https://github.com/zach111694/molloyLife</a>.</p>
+					</div>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "faculty-member">
+					<div class = "col-md-4">
+						 <a href = "https://github.com/jschanker/molloy-advising-web-application"><img src = "images/digicap.png" alt = "DIGICAP Advisement App Snapshot" class = "img-rounded img-responsive img-faculty"></a>
+					</div>
+					<div class = "col-md-8">
+						<h3>DIGICAP Advisement App</h3>
+						<p>Do you need to take a prerequisite for Calculus III to graduate on time?  Are you on pace with your general education or major requirements?  If you were to change your major, how many more credits do you need?  What classes are available this semester, and how would taking them impact your progress?  Do you need a given course and do you have its prerequisites?  For a few majors, the DIGICAP Advisement App will help answer these questions and more.  You can explore the requirements you still need based on your course history, major, and planned courses for this semester.  As you make changes to your schedule or major, you will see the impact in real time.  But we have big plans for this app.  Can it learn which courses are best for you to take?  <span class = "text-danger">NOTE: The Discussion Information Guide In Charting Academic Progress (DIGICAP) app is just that.  It's meant to help you make decisions and generate discussion about possible obstacles to graduating on time in consultation with your advisor.  It is <em>not</em> meant to replace advising nor tell you what you need to take with certainty.<!--not to replace good old common sense or to be followed without question-->  It also isn't tied into the database yet so the advice may not be 100% accurate.</span>  See the project in its current state on <a href = "https://github.com/jschanker/molloy-advising-web-application">https://github.com/jschanker/molloy-advising-web-application</a>.</p>
+					</div>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "faculty-member">
+					<div class = "col-md-4">
+						<a href = "https://github.com/jschanker/text2code"><img src = "images/text2code.png" alt = "Text2Code Logo" class = "img-rounded img-responsive img-faculty"></a>
+					</div>
+					<div class = "col-md-8">
+						<h3>Text2Code</h3>
+						<p>There is a growing movement that everyone should learn how to code.  (See e.g., <a href = "https://code.org">https://code.org</a>.)  But learning a new programming language can be a daunting task.  Compound the requirement to learn the syntax of the language with the need to discover how to "think like a computer", and it's no wonder that so many newcomers to programming become intimidated.  Google's initiative with Blockly in which people can assemble blocks of code in a language agnostic way is an attempt to remove the barriers of an unfamiliar syntax.  But you still need to solve problems in a way the computer can "understand", using standard programming constructs.  Text2Code is an attempt to bridge the divide between the way humans think of how to solve problems and the precise instructions you need to get a computer to solve them.  People can write instructions in the English language and have them translated into Blockly code blocks, which are then converted into Python and JavaScript code that can be run by the computer.  The ambitious goal for this project is to allow people to solve problems in their own ways and in their own languages and then see how their procedures are translated to computer instructions.  By removing the initial obstacles to programming, the hope is that Text2Code can allow people to focus on the solving of problems and see what can be achieved by a computer before they need to give precise instructions in the computer's language.  By seeing the translations of their ideas in code, novice programmers will (hopefully) see how computers solve problems and will eventually learn how to write a program in an actual computer language.  <!--Text2Code is an attempt-->  See the project in its current state on <a href = "https://github.com/jschanker/text2code">https://github.com/jschanker/text2code</a>.</p>
+					</div>
+				</div>
+			</div>
+			<!--<div class = "row">
+				<div class = "faculty-member">
+					<div class = "col-md-12">
+						<p style = "border-bottom: 1px solid #004400;"></p>
+					</div>
+				</div>
+			</div>-->
+		</div>
+	</body>
+</html>
