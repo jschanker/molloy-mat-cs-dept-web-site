@@ -50,6 +50,7 @@
 					this.text = "Show" + this.text.substring(4);
 				}
 				$("#" + this.id.substring(0,this.id.indexOf("-")) + "-degree-requirements").slideToggle("slow");
+				return false;
 			});
 
 			// COURSE LINKS
@@ -496,10 +497,10 @@
 					<div class = "col-md-1">
 						<!--space with background-->
 					</div>
-					<div class = "col-md-5">
-						<div style = "text-align:center;vertical-align:middle;">
+					<div class = "col-md-5 image-container">
+						<!--<div style = "text-align:center;vertical-align:middle;">-->
 							<img src = "images/american_roulette_wheel_layout.png" alt = "roulette wheel" class = "wheel course-image">
-						</div>
+						<!--</div>-->
 					</div>
 					<div class = "col-md-5">
 						<div class ="course-description" style = "">
