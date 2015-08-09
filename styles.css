@@ -105,8 +105,15 @@ img {
 	max-width:100%;
 }
 
+#csc120 .img-container,  #csc120 .img-container * {
+  text-align:center;
+  vertical-align:middle;
+  overflow:hidden;
+}
+
 img.wheel {
   /*display:block;*/
+  max-width:72%;
   border-radius: 50%;
   -webkit-transition: -webkit-transform 8.8s ease-in-out;
   transition: transform 8.8s ease-in-out;
