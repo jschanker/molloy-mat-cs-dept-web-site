@@ -44,10 +44,10 @@
 
 			$(".degree-requirements").css("display", "none");
 			$(".show-degree-reqs-link").click(function() {
-				if(this.text.indexOf("Show") === 0) {
-					this.text = "Hide" + this.text.substring(4);
+				if($(this).text().indexOf("Show") === 0) {
+					$(this).text("Hide" + $(this).text().substring(4));
 				} else {
-					this.text = "Show" + this.text.substring(4);
+					$(this).text("Show" + $(this).text().substring(4));
 				}
 				$("#" + this.id.substring(0,this.id.indexOf("-")) + "-degree-requirements").slideToggle("slow");
 				return false;
