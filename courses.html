@@ -67,11 +67,11 @@
 
 				var offsetY = $(courseHref).offset().top-$("#top-level-nav").height();
 
-				$('body').animate({
+				$('html, body').animate({
         			scrollTop: offsetY
     			}, 2000, function() {  				
     				window.location.hash = courseHref;
-    				$('body').animate({
+    				$('html, body').animate({
         				scrollTop: offsetY
     				}, 0)
     			});
@@ -84,11 +84,11 @@
 
 				var offsetY = $("#topContent").offset().top-$("#top-level-nav").height();
 
-				$('body').animate({
+				$('html, body').animate({
         			scrollTop: offsetY
     			}, 2000, function() {  				
     				window.location.hash = "#topContent";
-    				$('body').animate({
+    				$('html, body').animate({
         				scrollTop: offsetY
     				}, 0)
     			});
